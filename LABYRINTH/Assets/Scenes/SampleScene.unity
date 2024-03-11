@@ -448,7 +448,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -517,7 +517,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30012e6bd15da09459a6b81f1803d194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  doublejump: 0
+  dtg: 0
+  rb: {fileID: 0}
+  ff: 0
 --- !u!114 &1883679034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -527,9 +530,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 1883679026}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f1c723a526d83e4c9555c684851f65b, type: 3}
+  m_Script: {fileID: 11500000, guid: d090bc18cd06bfa4eb0d08f7e72cd688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lightC: 0
+  lightCm: 0
+  lightCa: 0
+  manaC: 0
+  manaCa: 0
+  manaCm: 0
+  manaCe: 0
+  manaR: 0
+  manaRm: 0
+  manaE: 0
+  manaEa: 0
+  manaEm: 0
+  healthC: 0
+  healthCa: 0
+  healthR: 0
+  healthRm: 0
+  healthRa: 0
+  armor: 0
+  shield: 0
+  shieldalloc: 0
+  shieldm: 0
+  strength: 0
+  strengthalloc: 0
+  strengthm: 0
+  strengtha: 0
+  speed: 0
+  jumph: 0
+  mobilitym: 0
+  mobilitya: 0
+  mobilityalloc: 0
+  speedalloc: 0
+  jumpalloc: 0
+  drawspd: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
