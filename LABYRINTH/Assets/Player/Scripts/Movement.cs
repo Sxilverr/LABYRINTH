@@ -10,11 +10,13 @@ public class Movement : MonoBehaviour
     public Rigidbody2D rb;
     public static float jump;
     public float ff;
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         dtg = GetComponent<Collider2D>().bounds.extents.y;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -29,6 +31,13 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.S))
         {
             rb.AddForce(new Vector3(0, -ff, 0));
+        }
+        if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+        {
+            anim.SetBool("Running", true);
+        } else
+        {
+            anim.SetBool("Running", false);
         }
     }
     void Update()
@@ -52,10 +61,10 @@ public class Movement : MonoBehaviour
     {
         if(Physics2D.Raycast(transform.position, -Vector3.up, dtg + 0.05f)==true)
             return Physics2D.Raycast(transform.position, -Vector3.up, dtg + 0.05f);
-        if (Physics2D.Raycast(new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z), -Vector3.up, dtg + 0.05f))
-            return Physics2D.Raycast(new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z), -Vector3.up, dtg + 0.05f);
-        if (Physics2D.Raycast(new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z), -Vector3.up, dtg + 0.05f))
-            return Physics2D.Raycast(new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z), -Vector3.up, dtg + 0.05f);
+        if (Physics2D.Raycast(new Vector3(transform.position.x - 0.3125f, transform.position.y, transform.position.z), -Vector3.up, dtg + 0.05f))
+            return Physics2D.Raycast(new Vector3(transform.position.x - 0.3125f, transform.position.y, transform.position.z), -Vector3.up, dtg + 0.05f);
+        if (Physics2D.Raycast(new Vector3(transform.position.x + 0.3125f, transform.position.y, transform.position.z), -Vector3.up, dtg + 0.05f))
+            return Physics2D.Raycast(new Vector3(transform.position.x + 0.3125f, transform.position.y, transform.position.z), -Vector3.up, dtg + 0.05f);
         return false;
     }
 }
