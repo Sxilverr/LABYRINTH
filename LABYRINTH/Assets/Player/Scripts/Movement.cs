@@ -55,6 +55,17 @@ public class Movement : MonoBehaviour
         if (jumpenabled())
         {
             doublejump = true;
+            anim.SetBool("IsUp", false);
+        } else
+        {
+            anim.SetBool("IsUp", true);
+            if(rb.velocity.y >= 1)
+            {
+                anim.SetBool("NegVel", false);
+            } else
+            {
+                anim.SetBool("NegVel", true);
+            }
         }
     }
     public bool jumpenabled()
