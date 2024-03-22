@@ -522,6 +522,8 @@ MonoBehaviour:
   dtg: 0
   rb: {fileID: 0}
   ff: 0
+  anim: {fileID: 0}
+  left: 0
 --- !u!114 &1883679034
 MonoBehaviour:
   m_ObjectHideFlags: 0

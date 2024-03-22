@@ -11,6 +11,8 @@ public class Movement : MonoBehaviour
     public static float jump;
     public float ff;
     public Animator anim;
+    public bool left = false;
+    public string animst;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,26 +24,76 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(Input.GetKey(KeyCode.D)){
-            transform.position += new Vector3(speed/2500f,0,0);
-        }
-        if(Input.GetKey(KeyCode.A)){
-            transform.position -= new Vector3(speed/2500f,0,0);
-        }
-        if (Input.GetKey(KeyCode.S))
+        if (animst != "FwdSwing")
         {
-            rb.AddForce(new Vector3(0, -ff, 0));
+            if (Input.GetKey(KeyCode.D))
+            {
+                transform.position += new Vector3(speed / 2500f, 0, 0);
+                if (!Input.GetKey(KeyCode.LeftArrow))
+                    left = false;
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                transform.position -= new Vector3(speed / 2500f, 0, 0);
+                if (!Input.GetKey(KeyCode.RightArrow))
+                    left = true;
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                rb.AddForce(new Vector3(0, -ff, 0));
+            }
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+            {
+                anim.SetBool("Running", true);
+            }
+            else
+            {
+                anim.SetBool("Running", false);
+            }
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                left = true;
+            }
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                left = false;
+            }
+            if (Input.GetKey(KeyCode.A) == true && Input.GetKey(KeyCode.RightArrow) == true)
+            {
+                anim.SetBool("RevDir", true);
+            }
+            else if ((Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.LeftArrow)))
+            {
+                anim.SetBool("RevDir", true);
+            }
+            else
+            {
+                anim.SetBool("RevDir", false);
+            }
         }
-        if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
-        {
-            anim.SetBool("Running", true);
-        } else
-        {
-            anim.SetBool("Running", false);
-        }
+        animst = anim.GetCurrentAnimatorClipInfo(0)[0].clip.name;
     }
     void Update()
     {
+        if (animst != "FwdSwing")
+        {
+            if (Input.GetKeyDown(KeyCode.E) && !(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow)))
+            {
+                Debug.Log("ATK");
+                anim.SetBool("Attack", true);
+            }
+        }
+        if (!Input.GetKeyDown(KeyCode.E))
+        {
+                anim.SetBool("Attack", false);
+        }
+        if(left == true)
+        {
+            GetComponent<SpriteRenderer>().flipX = true;
+        } else
+        {
+            GetComponent<SpriteRenderer>().flipX = false;
+        }
         ff = jump / 2;
         if (jumpenabled() && Input.GetKeyDown(KeyCode.Space))
         {
