@@ -19,6 +19,16 @@ public class Movement : MonoBehaviour
     public PolygonCollider2D rups;
     public PolygonCollider2D rupfwds;
     public PolygonCollider2D rfwds;
+    public PolygonCollider2D lupbacks;
+    public PolygonCollider2D lups;
+    public PolygonCollider2D lupfwds;
+    public PolygonCollider2D lfwds;
+    public PolygonCollider2D rj1;
+    public PolygonCollider2D rj2;
+    public PolygonCollider2D rj3;
+    public PolygonCollider2D lj1;
+    public PolygonCollider2D lj2;
+    public PolygonCollider2D lj3;
     // Start is called before the first frame update
     void Start()
     {
@@ -157,7 +167,7 @@ public class Movement : MonoBehaviour
         }
         if (left == false)
         {
-            if (asp.name == "SwordSwingUpRt")
+            if (asp.name == "SwordSwingUpRt" && animst == "FwdSwing")
             {
                 rupfwds.enabled = true;
             }
@@ -165,7 +175,7 @@ public class Movement : MonoBehaviour
             {
                 rupfwds.enabled = false;
             }
-            if (asp.name == "SwordSwingUp")
+            if (asp.name == "SwordSwingUp" && animst == "FwdSwing")
             {
                 rups.enabled = true;
             }
@@ -173,7 +183,7 @@ public class Movement : MonoBehaviour
             {
                 rups.enabled = false;
             }
-            if (asp.name == "SwordSwingUpRtBack")
+            if (asp.name == "SwordSwingUpRtBack" && animst == "FwdSwing")
             {
                 rupbacks.enabled = true;
             }
@@ -181,13 +191,95 @@ public class Movement : MonoBehaviour
             {
                 rupbacks.enabled = false;
             }
-            if (asp.name == "SwordSwingRt")
+            if (asp.name == "SwordSwingRt" && animst == "FwdSwing")
             {
                 rfwds.enabled = true;
             }
             else
             {
                 rfwds.enabled = false;
+            }
+            if (asp.name == "SwordSwingRt" && animst == "Jab")
+            {
+                rj1.enabled = true;
+            }
+            else
+            {
+                rj1.enabled = false;
+            }
+            if (asp.name == "SwordJabRt" && animst == "Jab")
+            {
+                rj2.enabled = true;
+            }
+            else
+            {
+                rj2.enabled = false;
+            }
+            if (asp.name == "SwordJabRt2" && animst == "Jab")
+            {
+                rj3.enabled = true;
+            }
+            else
+            {
+                rj3.enabled = false;
+            }
+        } else
+        {
+            if (asp.name == "SwordSwingUpRt" && animst == "FwdSwing")
+            {
+                lupfwds.enabled = true;
+            }
+            else
+            {
+                lupfwds.enabled = false;
+            }
+            if (asp.name == "SwordSwingUp" && animst == "FwdSwing")
+            {
+                lups.enabled = true;
+            }
+            else
+            {
+                lups.enabled = false;
+            }
+            if (asp.name == "SwordSwingUpRtBack" && animst == "FwdSwing")
+            {
+                lupbacks.enabled = true;
+            }
+            else
+            {
+                lupbacks.enabled = false;
+            }
+            if (asp.name == "SwordSwingRt" && animst == "FwdSwing")
+            {
+                lfwds.enabled = true;
+            }
+            else
+            {
+                lfwds.enabled = false;
+            }
+            if (asp.name == "SwordSwingRt" && animst == "Jab")
+            {
+                lj1.enabled = true;
+            }
+            else
+            {
+                lj1.enabled = false;
+            }
+            if (asp.name == "SwordJabRt" && animst == "Jab")
+            {
+                lj2.enabled = true;
+            }
+            else
+            {
+                lj2.enabled = false;
+            }
+            if (asp.name == "SwordJabRt2" && animst == "Jab")
+            {
+                lj3.enabled = true;
+            }
+            else
+            {
+                lj3.enabled = false;
             }
         }
     }

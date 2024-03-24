@@ -34,7 +34,7 @@ public class Damagetest : MonoBehaviour
         if (hitbox.sharedMaterial != null)
         {
             damage += (1 / (1 - hitbox.sharedMaterial.friction) - 1) * hitbox.gameObject.GetComponent<StatManager>().strength;
-            GetComponent<Rigidbody2D>().AddForce(10 * Vector3.Normalize(transform.position - hitbox.gameObject.transform.position) * (1 / (1 - hitbox.sharedMaterial.bounciness) - 1));
+            GetComponent<Rigidbody2D>().AddForce(18 * Vector3.Normalize(transform.position - hitbox.gameObject.transform.position) * (1 / (1 - hitbox.sharedMaterial.bounciness) - 1));
         }
     }
 }
