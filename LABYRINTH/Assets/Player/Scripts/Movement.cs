@@ -14,6 +14,11 @@ public class Movement : MonoBehaviour
     public bool left = false;
     public string animst;
     public float cd;
+    public Sprite asp;
+    public PolygonCollider2D rupbacks;
+    public PolygonCollider2D rups;
+    public PolygonCollider2D rupfwds;
+    public PolygonCollider2D rfwds;
     // Start is called before the first frame update
     void Start()
     {
@@ -93,6 +98,7 @@ public class Movement : MonoBehaviour
     }
     void Update()
     {
+        asp = GetComponent<SpriteRenderer>().sprite;
         if (animst != "FwdSwing" && animst != "Jab" && cd <= 0)
         {
             if (Input.GetKeyDown(KeyCode.E) && !(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow)))
@@ -147,6 +153,41 @@ public class Movement : MonoBehaviour
             } else
             {
                 anim.SetBool("NegVel", true);
+            }
+        }
+        if (left == false)
+        {
+            if (asp.name == "SwordSwingUpRt")
+            {
+                rupfwds.enabled = true;
+            }
+            else
+            {
+                rupfwds.enabled = false;
+            }
+            if (asp.name == "SwordSwingUp")
+            {
+                rups.enabled = true;
+            }
+            else
+            {
+                rups.enabled = false;
+            }
+            if (asp.name == "SwordSwingUpRtBack")
+            {
+                rupbacks.enabled = true;
+            }
+            else
+            {
+                rupbacks.enabled = false;
+            }
+            if (asp.name == "SwordSwingRt")
+            {
+                rfwds.enabled = true;
+            }
+            else
+            {
+                rfwds.enabled = false;
             }
         }
     }
