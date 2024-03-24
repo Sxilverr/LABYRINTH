@@ -13,6 +13,7 @@ public class Movement : MonoBehaviour
     public Animator anim;
     public bool left = false;
     public string animst;
+    public float cd;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +25,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (animst != "FwdSwing")
+        if (animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab")
         {
             if (Input.GetKey(KeyCode.D))
             {
@@ -70,22 +71,51 @@ public class Movement : MonoBehaviour
             {
                 anim.SetBool("RevDir", false);
             }
+        } else
+        if (animst == "FwdSwing")
+        {
+            cd = 5;
         }
+        if (animst == "UpJab")
+        {
+            cd = 5;
+        }
+        if (animst == "Jab")
+        {
+            if (left == true)
+                transform.position -= new Vector3(speed / 2500f, 0, 0);
+            if (left == false)
+                transform.position += new Vector3(speed / 2500f, 0, 0);
+            cd = 8;
+        }
+        cd -= 1;
         animst = anim.GetCurrentAnimatorClipInfo(0)[0].clip.name;
     }
     void Update()
     {
-        if (animst != "FwdSwing")
+        if (animst != "FwdSwing" && animst != "Jab" && cd <= 0)
         {
             if (Input.GetKeyDown(KeyCode.E) && !(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow)))
             {
                 Debug.Log("ATK");
                 anim.SetBool("Attack", true);
             }
+            if (Input.GetKeyDown(KeyCode.E) && (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow)))
+            {
+                Debug.Log("ATK");
+                anim.SetBool("Jab", true);
+            }
+            if (Input.GetKeyDown(KeyCode.E) && (Input.GetKey(KeyCode.UpArrow)))
+            {
+                Debug.Log("ATK");
+                anim.SetBool("UpJab", true);
+            }
         }
         if (!Input.GetKeyDown(KeyCode.E))
         {
-                anim.SetBool("Attack", false);
+            anim.SetBool("Attack", false);
+            anim.SetBool("Jab", false);
+            anim.SetBool("UpJab", false);
         }
         if(left == true)
         {
@@ -95,11 +125,11 @@ public class Movement : MonoBehaviour
             GetComponent<SpriteRenderer>().flipX = false;
         }
         ff = jump / 2;
-        if (jumpenabled() && Input.GetKeyDown(KeyCode.Space))
+        if (jumpenabled() && Input.GetKeyDown(KeyCode.Space) && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab")
         {
             rb.AddForce(new Vector3(0, 4*jump, 0));
         }
-        if (!jumpenabled() && Input.GetKeyDown(KeyCode.Space) && doublejump == true)
+        if (!jumpenabled() && Input.GetKeyDown(KeyCode.Space) && doublejump == true && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab")
         {
             rb.velocity=(new Vector3(rb.velocity.x, jump/10f, 0));
             doublejump = false;
