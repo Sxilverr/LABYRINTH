@@ -29,6 +29,9 @@ public class Movement : MonoBehaviour
     public PolygonCollider2D lj1;
     public PolygonCollider2D lj2;
     public PolygonCollider2D lj3;
+    public PolygonCollider2D ruj1;
+    public PolygonCollider2D ruj2;
+    public PolygonCollider2D ruj3;
     // Start is called before the first frame update
     void Start()
     {
@@ -222,6 +225,30 @@ public class Movement : MonoBehaviour
             else
             {
                 rj3.enabled = false;
+            }
+            if (asp.name == "SwordSwingUp" && animst == "UpJab")
+            {
+                ruj1.enabled = true;
+            }
+            else
+            {
+                ruj1.enabled = false;
+            }
+            if (asp.name == "SwordJabUp" && animst == "UpJab")
+            {
+                ruj2.enabled = true;
+            }
+            else
+            {
+                ruj2.enabled = false;
+            }
+            if (asp.name == "SwordJabUp2" && animst == "UpJab")
+            {
+                ruj3.enabled = true;
+            }
+            else
+            {
+                ruj3.enabled = false;
             }
         } else
         {

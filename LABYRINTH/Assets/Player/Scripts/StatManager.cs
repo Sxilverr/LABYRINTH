@@ -46,6 +46,8 @@ public class StatManager : MonoBehaviour
     public float jumpalloc;
 
     public float drawspd;
+    public float fps;
+    public float ffps;
     // Start is called before the first frame update
     void Start()
     {
@@ -67,5 +69,10 @@ public class StatManager : MonoBehaviour
         jumph = 0.5f * (1 + mobilitym) * (100*Mathf.Log10(lightC) + mobilitya + Mathf.Pow(jumpalloc, 0.6666666666667f));
         Movement.speed = speed*3f;
         Movement.jump = jumph;
+        fps = 1/Time.deltaTime;
+    }
+    void FixedUpdate()
+    {
+        ffps = 1 / Time.deltaTime;
     }
 }

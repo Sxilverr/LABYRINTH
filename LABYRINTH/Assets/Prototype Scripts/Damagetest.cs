@@ -8,6 +8,8 @@ public class Damagetest : MonoBehaviour
     public float damagecd;
     public float damagediff;
     public float instdiff;
+    public bool colliding;
+    public float collct;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,17 +19,31 @@ public class Damagetest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        damagecd -= 1;
+        if (colliding == false)
+            damagecd -= 1;
         if(damage != instdiff)
         {
-            damagecd = 10;
+            damagecd = 20;
             instdiff = damage;
         }
-        if (damage != damagediff && damagecd == 0)
+        if (damage != damagediff && colliding == false)
         {
             Debug.Log(damage-damagediff);
             damagediff = damage;
         }
+        if(collct == 0)
+        {
+            colliding = false;
+        }
+        else
+        {
+            colliding = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.sharedMaterial != null)
+            collct -= 1;
     }
     private void OnTriggerStay2D(Collider2D hitbox)
     {
@@ -35,6 +51,13 @@ public class Damagetest : MonoBehaviour
         {
             damage += (1 / (1 - hitbox.sharedMaterial.friction) - 1) * hitbox.gameObject.GetComponent<StatManager>().strength;
             GetComponent<Rigidbody2D>().AddForce(18 * Vector3.Normalize(transform.position - hitbox.gameObject.transform.position) * (1 / (1 - hitbox.sharedMaterial.bounciness) - 1));
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.sharedMaterial != null)
+        {
+            collct += 1;
         }
     }
 }
