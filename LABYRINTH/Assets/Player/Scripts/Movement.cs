@@ -308,6 +308,30 @@ public class Movement : MonoBehaviour
             {
                 lj3.enabled = false;
             }
+            if (asp.name == "SwordSwingUp" && animst == "UpJab")
+            {
+                ruj1.enabled = true;
+            }
+            else
+            {
+                ruj1.enabled = false;
+            }
+            if (asp.name == "SwordJabUp" && animst == "UpJab")
+            {
+                ruj2.enabled = true;
+            }
+            else
+            {
+                ruj2.enabled = false;
+            }
+            if (asp.name == "SwordJabUp2" && animst == "UpJab")
+            {
+                ruj3.enabled = true;
+            }
+            else
+            {
+                ruj3.enabled = false;
+            }
         }
     }
     public bool jumpenabled()
