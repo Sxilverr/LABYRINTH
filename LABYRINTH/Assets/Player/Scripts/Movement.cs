@@ -32,6 +32,14 @@ public class Movement : MonoBehaviour
     public PolygonCollider2D ruj1;
     public PolygonCollider2D ruj2;
     public PolygonCollider2D ruj3;
+    public PolygonCollider2D rdj1;
+    public PolygonCollider2D rdj2;
+    public PolygonCollider2D rdj3;
+    public PolygonCollider2D rdj4;
+    public PolygonCollider2D ldj1;
+    public PolygonCollider2D ldj2;
+    public PolygonCollider2D ldj3;
+    public PolygonCollider2D ldj4;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +51,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab")
+        if (animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash")
         {
             if (Input.GetKey(KeyCode.D))
             {
@@ -98,6 +106,10 @@ public class Movement : MonoBehaviour
         {
             cd = 5;
         }
+        if (animst == "DownSlash")
+        {
+            cd = 8;
+        }
         if (animst == "Jab")
         {
             if (left == true)
@@ -112,7 +124,7 @@ public class Movement : MonoBehaviour
     void Update()
     {
         asp = GetComponent<SpriteRenderer>().sprite;
-        if (animst != "FwdSwing" && animst != "Jab" && cd <= 0)
+        if (animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "DownSlash" && animst != "UpJab")
         {
             if (Input.GetKeyDown(KeyCode.E) && !(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow)))
             {
@@ -129,12 +141,18 @@ public class Movement : MonoBehaviour
                 Debug.Log("ATK");
                 anim.SetBool("UpJab", true);
             }
+            if (Input.GetKeyDown(KeyCode.E) && (Input.GetKey(KeyCode.DownArrow)))
+            {
+                Debug.Log("ATK");
+                anim.SetBool("DownSlash", true);
+            }
         }
         if (!Input.GetKeyDown(KeyCode.E))
         {
             anim.SetBool("Attack", false);
             anim.SetBool("Jab", false);
             anim.SetBool("UpJab", false);
+            anim.SetBool("DownSlash", false);
         }
         if(left == true)
         {
@@ -144,11 +162,11 @@ public class Movement : MonoBehaviour
             GetComponent<SpriteRenderer>().flipX = false;
         }
         ff = jump / 2;
-        if (jumpenabled() && Input.GetKeyDown(KeyCode.Space) && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab")
+        if (jumpenabled() && Input.GetKeyDown(KeyCode.Space) && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash")
         {
             rb.AddForce(new Vector3(0, 4*jump, 0));
         }
-        if (!jumpenabled() && Input.GetKeyDown(KeyCode.Space) && doublejump == true && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab")
+        if (!jumpenabled() && Input.GetKeyDown(KeyCode.Space) && doublejump == true && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash")
         {
             rb.velocity=(new Vector3(rb.velocity.x, jump/10f, 0));
             doublejump = false;
@@ -250,6 +268,38 @@ public class Movement : MonoBehaviour
             {
                 ruj3.enabled = false;
             }
+            if (asp.name == "SwordSwingRt" && animst == "DownSlash")
+            {
+                rdj1.enabled = true;
+            }
+            else
+            {
+                rdj1.enabled = false;
+            }
+            if (asp.name == "SwordJabRt" && animst == "DownSlash")
+            {
+                rdj2.enabled = true;
+            }
+            else
+            {
+                rdj2.enabled = false;
+            }
+            if (asp.name == "SwordSwingLt" && animst == "DownSlash")
+            {
+                rdj3.enabled = true;
+            }
+            else
+            {
+                rdj3.enabled = false;
+            }
+            if (asp.name == "SwordJabLt" && animst == "DownSlash")
+            {
+                rdj4.enabled = true;
+            }
+            else
+            {
+                rdj4.enabled = false;
+            }
         } else
         {
             if (asp.name == "SwordSwingUpRt" && animst == "FwdSwing")
@@ -331,6 +381,38 @@ public class Movement : MonoBehaviour
             else
             {
                 ruj3.enabled = false;
+            }
+            if (asp.name == "SwordSwingRt" && animst == "DownSlash")
+            {
+                ldj1.enabled = true;
+            }
+            else
+            {
+                ldj1.enabled = false;
+            }
+            if (asp.name == "SwordJabRt" && animst == "DownSlash")
+            {
+                ldj2.enabled = true;
+            }
+            else
+            {
+                ldj2.enabled = false;
+            }
+            if (asp.name == "SwordSwingLt" && animst == "DownSlash")
+            {
+                ldj3.enabled = true;
+            }
+            else
+            {
+                ldj3.enabled = false;
+            }
+            if (asp.name == "SwordJabLt" && animst == "DownSlash")
+            {
+                ldj4.enabled = true;
+            }
+            else
+            {
+                ldj4.enabled = false;
             }
         }
     }
