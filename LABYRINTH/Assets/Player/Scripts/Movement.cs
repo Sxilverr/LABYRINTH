@@ -40,6 +40,8 @@ public class Movement : MonoBehaviour
     public PolygonCollider2D ldj2;
     public PolygonCollider2D ldj3;
     public PolygonCollider2D ldj4;
+    public PolygonCollider2D daoir;
+    public float vel;
     // Start is called before the first frame update
     void Start()
     {
@@ -51,7 +53,22 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash")
+        if (animst == "DownAir" || animst == "Nair" || animst == "Fair" || animst == "UpAir")
+        {
+            if (Input.GetKey(KeyCode.D))
+            {
+                transform.position += new Vector3(speed / 2500f, 0, 0);
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                transform.position -= new Vector3(speed / 2500f, 0, 0);
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                rb.AddForce(new Vector3(0, -ff, 0));
+            }
+        }
+        if (animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir")
         {
             if (Input.GetKey(KeyCode.D))
             {
@@ -123,6 +140,8 @@ public class Movement : MonoBehaviour
     }
     void Update()
     {
+        vel = Mathf.Abs(rb.velocity.y);
+        daoir.sharedMaterial.friction = (0.95f * vel) / (1f * vel + 1)-0.1f;
         asp = GetComponent<SpriteRenderer>().sprite;
         if (animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "DownSlash" && animst != "UpJab")
         {
@@ -130,21 +149,25 @@ public class Movement : MonoBehaviour
             {
                 Debug.Log("ATK");
                 anim.SetBool("Attack", true);
+                anim.SetBool("Nair", true);
             }
             if (Input.GetKeyDown(KeyCode.E) && (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow)))
             {
                 Debug.Log("ATK");
                 anim.SetBool("Jab", true);
+                anim.SetBool("Fair", true);
             }
             if (Input.GetKeyDown(KeyCode.E) && (Input.GetKey(KeyCode.UpArrow)))
             {
                 Debug.Log("ATK");
                 anim.SetBool("UpJab", true);
+                anim.SetBool("Uair", true);
             }
             if (Input.GetKeyDown(KeyCode.E) && (Input.GetKey(KeyCode.DownArrow)))
             {
                 Debug.Log("ATK");
                 anim.SetBool("DownSlash", true);
+                anim.SetBool("Dair", true);
             }
         }
         if (!Input.GetKeyDown(KeyCode.E))
@@ -153,6 +176,10 @@ public class Movement : MonoBehaviour
             anim.SetBool("Jab", false);
             anim.SetBool("UpJab", false);
             anim.SetBool("DownSlash", false);
+            anim.SetBool("Dair", false);
+            anim.SetBool("Fair", false);
+            anim.SetBool("Nair", false);
+            anim.SetBool("Uair", false);
         }
         if(left == true)
         {
@@ -162,11 +189,11 @@ public class Movement : MonoBehaviour
             GetComponent<SpriteRenderer>().flipX = false;
         }
         ff = jump / 2;
-        if (jumpenabled() && Input.GetKeyDown(KeyCode.Space) && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash")
+        if (jumpenabled() && Input.GetKeyDown(KeyCode.Space) && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir")
         {
             rb.AddForce(new Vector3(0, 4*jump, 0));
         }
-        if (!jumpenabled() && Input.GetKeyDown(KeyCode.Space) && doublejump == true && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash")
+        if (!jumpenabled() && Input.GetKeyDown(KeyCode.Space) && doublejump == true && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir")
         {
             rb.velocity=(new Vector3(rb.velocity.x, jump/10f, 0));
             doublejump = false;
@@ -414,6 +441,14 @@ public class Movement : MonoBehaviour
             {
                 ldj4.enabled = false;
             }
+        }
+        if (asp.name == "DownAir" && animst == "DownAir")
+        {
+            daoir.enabled = true;
+        }
+        else
+        {
+            daoir.enabled = false;
         }
     }
     public bool jumpenabled()
