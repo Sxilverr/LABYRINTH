@@ -49,6 +49,8 @@ public class Movement : MonoBehaviour
     public PolygonCollider2D ac6;
     public PolygonCollider2D ac7;
     public PolygonCollider2D ac8;
+    public PolygonCollider2D sr;
+    public PolygonCollider2D sl;
     public GameObject arrow;
     public float vel;
     // Start is called before the first frame update
@@ -149,12 +151,23 @@ public class Movement : MonoBehaviour
     }
     void Update()
     {
-        if(Input.GetKey(KeyCode.LeftShift) && jumpenabled() == true)
+        if (Input.GetKey(KeyCode.LeftShift) && jumpenabled() == true)
         {
             anim.SetBool("Shielding", true);
-        } else
+            if (left == false)
+            {
+                sr.enabled = true;
+            }
+            else
+            {
+                sl.enabled = true;
+            }
+        }
+        else
         {
             anim.SetBool("Shielding", false);
+            sr.enabled = false;
+            sl.enabled = false;
         }
         vel = Mathf.Abs(rb.velocity.y);
         daoir.sharedMaterial.friction = (0.95f * vel) / (1f * vel + 1)-0.1f;
