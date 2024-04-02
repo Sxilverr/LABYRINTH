@@ -65,8 +65,8 @@ public class StatManager : MonoBehaviour
         healthR = (1 + healthRm) * (Mathf.Log10(lightC - 99) + 1) * (healthC + healthRa) / 100f;
         shield = (1 + shieldm) * shieldalloc / 10f;
         strength = (1 + strengthm) * (strengthalloc + 100 * (1 + strengtha));
-        speed = 0.5f * (1 + mobilitym) * (100*Mathf.Log10(lightC) + mobilitya + Mathf.Pow(speedalloc, 0.6666666666667f));
-        jumph = 0.5f * (1 + mobilitym) * (100*Mathf.Log10(lightC) + mobilitya + Mathf.Pow(jumpalloc, 0.6666666666667f));
+        speed = 0.5f * (1 + mobilitym) * (100*Mathf.Log10(lightC) + mobilitya + 60*Mathf.Log(speedalloc/100+1));
+        jumph = 0.5f * (1 + mobilitym) * (100*Mathf.Log10(lightC) + mobilitya + 60*Mathf.Log(jumpalloc/100+1));
         Movement.speed = speed*3f;
         Movement.jump = jumph;
         fps = 1/Time.deltaTime;

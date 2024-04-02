@@ -41,6 +41,15 @@ public class Movement : MonoBehaviour
     public PolygonCollider2D ldj3;
     public PolygonCollider2D ldj4;
     public PolygonCollider2D daoir;
+    public PolygonCollider2D ac1;
+    public PolygonCollider2D ac2;
+    public PolygonCollider2D ac3;
+    public PolygonCollider2D ac4;
+    public PolygonCollider2D ac5;
+    public PolygonCollider2D ac6;
+    public PolygonCollider2D ac7;
+    public PolygonCollider2D ac8;
+    public GameObject arrow;
     public float vel;
     // Start is called before the first frame update
     void Start()
@@ -68,7 +77,7 @@ public class Movement : MonoBehaviour
                 rb.AddForce(new Vector3(0, -ff, 0));
             }
         }
-        if (animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir")
+        if (animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false)
         {
             if (Input.GetKey(KeyCode.D))
             {
@@ -140,10 +149,17 @@ public class Movement : MonoBehaviour
     }
     void Update()
     {
+        if(Input.GetKey(KeyCode.LeftShift) && jumpenabled() == true)
+        {
+            anim.SetBool("Shielding", true);
+        } else
+        {
+            anim.SetBool("Shielding", false);
+        }
         vel = Mathf.Abs(rb.velocity.y);
         daoir.sharedMaterial.friction = (0.95f * vel) / (1f * vel + 1)-0.1f;
         asp = GetComponent<SpriteRenderer>().sprite;
-        if (animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "DownSlash" && animst != "UpJab")
+        if (animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "DownSlash" && animst != "UpJab" && animst != "Shidle" && animst != "Shrun" && animst != "ShackRun")
         {
             if (Input.GetKeyDown(KeyCode.E) && !(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow)))
             {
@@ -169,6 +185,80 @@ public class Movement : MonoBehaviour
                 anim.SetBool("DownSlash", true);
                 anim.SetBool("Dair", true);
             }
+            if (Input.GetKeyDown(KeyCode.Q) && (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow)))
+            {
+                anim.SetBool("BowF", true);
+            }
+            if (Input.GetKeyDown(KeyCode.Q) && (Input.GetKey(KeyCode.UpArrow)) && animst != "NBow" && animst != "NBowFull" && animst != "BowDraw" && animst != "BowFull" && animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir")
+            {
+                if (left == true)
+                {
+                    left = false;
+                    anim.SetBool("Nbow", true);
+                } else
+                {
+                    left = true;
+                    anim.SetBool("Nbow", true);
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Q) && (Input.GetKey(KeyCode.DownArrow)) && animst != "NBow" && animst != "NBowFull" && animst != "BowDraw" && animst != "BowFull" && animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir")
+            {
+                if (left == true)
+                {
+                    left = false;
+                    anim.SetBool("BowF", true);
+                }
+                else
+                {
+                    left = true;
+                    anim.SetBool("BowF", true);
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Q) && !(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow)))
+            {
+                anim.SetBool("Nbow", true);
+            }
+            if (!Input.GetKey(KeyCode.Q))
+            {
+                if (animst == "BowFull")
+                {
+                    if (anim.GetBool("BowF") == true)
+                    {
+                        if (left == false)
+                        {
+                            Instantiate(arrow, transform.position + new Vector3(0.5f, -0.0625f, 0), Quaternion.identity);
+                        } else
+                        {
+                            Instantiate(arrow, transform.position + new Vector3(-0.5f, -0.25f, 0), Quaternion.Euler(0, 0, 180));
+                        }
+                    }
+                    anim.SetBool("BowF", false);
+                }
+                if(jumpenabled() == false)
+                {
+                    anim.SetBool("BowF", false);
+                    anim.SetBool("Nbow", false);
+                }
+                if (animst == "NBowFull")
+                {
+                    if (anim.GetBool("Nbow") == true)
+                    {
+                        if (left == false)
+                        {
+                            Instantiate(arrow, transform.position + new Vector3(0.4375f, .1875f, 0), Quaternion.Euler(0, 0, 45));
+                        }
+                        else
+                        {
+                            Instantiate(arrow, transform.position + new Vector3(-0.4375f, -0.0625f, 0), Quaternion.Euler(0, 0, 135));
+                        }
+                    }
+                    anim.SetBool("Nbow", false);
+                }
+            }
+            if(animst == "BowFull")
+            {
+                cd = 5;
+            }
         }
         if (!Input.GetKeyDown(KeyCode.E))
         {
@@ -189,11 +279,11 @@ public class Movement : MonoBehaviour
             GetComponent<SpriteRenderer>().flipX = false;
         }
         ff = jump / 2;
-        if (jumpenabled() && Input.GetKeyDown(KeyCode.Space) && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir")
+        if (jumpenabled() && Input.GetKeyDown(KeyCode.Space) && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull")
         {
             rb.AddForce(new Vector3(0, 4*jump, 0));
         }
-        if (!jumpenabled() && Input.GetKeyDown(KeyCode.Space) && doublejump == true && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir")
+        if (!jumpenabled() && Input.GetKeyDown(KeyCode.Space) && doublejump == true && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull")
         {
             rb.velocity=(new Vector3(rb.velocity.x, jump/10f, 0));
             doublejump = false;
@@ -327,6 +417,54 @@ public class Movement : MonoBehaviour
             {
                 rdj4.enabled = false;
             }
+            if (asp.name == "UA")
+            {
+                ac1.enabled = true;
+            }
+            else
+            {
+                ac1.enabled = false;
+            }
+            if (asp.name == "URA")
+            {
+                ac2.enabled = true;
+            }
+            else
+            {
+                ac2.enabled = false;
+            }
+            if (asp.name == "RA")
+            {
+                ac3.enabled = true;
+            }
+            else
+            {
+                ac3.enabled = false;
+            }
+            if (asp.name == "DRA")
+            {
+                ac4.enabled = true;
+            }
+            else
+            {
+                ac4.enabled = false;
+            }
+            if (asp.name == "DownAir" && animst != "DownAir")
+            {
+                ac5.enabled = true;
+            }
+            else
+            {
+                ac5.enabled = false;
+            }
+            if (asp.name == "ULA")
+            {
+                ac8.enabled = true;
+            }
+            else
+            {
+                ac8.enabled = false;
+            }
         } else
         {
             if (asp.name == "SwordSwingUpRt" && animst == "FwdSwing")
@@ -440,6 +578,54 @@ public class Movement : MonoBehaviour
             else
             {
                 ldj4.enabled = false;
+            }
+            if (asp.name == "UA")
+            {
+                ac1.enabled = true;
+            }
+            else
+            {
+                ac1.enabled = false;
+            }
+            if (asp.name == "URA")
+            {
+                ac8.enabled = true;
+            }
+            else
+            {
+                ac8.enabled = false;
+            }
+            if (asp.name == "RA")
+            {
+                ac7.enabled = true;
+            }
+            else
+            {
+                ac7.enabled = false;
+            }
+            if (asp.name == "DRA")
+            {
+                ac6.enabled = true;
+            }
+            else
+            {
+                ac6.enabled = false;
+            }
+            if (asp.name == "DownAir" && animst != "DownAir")
+            {
+                ac5.enabled = true;
+            }
+            else
+            {
+                ac5.enabled = false;
+            }
+            if (asp.name == "ULA")
+            {
+                ac1.enabled = true;
+            }
+            else
+            {
+                ac1.enabled = false;
             }
         }
         if (asp.name == "DownAir" && animst == "DownAir")

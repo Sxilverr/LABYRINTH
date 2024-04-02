@@ -6,6 +6,6 @@ PhysicsMaterial2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Down Air
-  friction: 0
-  bounciness: 0.9
+  m_Name: Arrow
+  friction: 0.90909094
+  bounciness: 0.8
