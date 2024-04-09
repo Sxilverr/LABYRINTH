@@ -64,6 +64,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        dtg = GetComponent<Collider2D>().bounds.extents.y;
         if (animst == "DownAir" || animst == "Nair" || animst == "Fair" || animst == "UpAir")
         {
             if (Input.GetKey(KeyCode.D))
