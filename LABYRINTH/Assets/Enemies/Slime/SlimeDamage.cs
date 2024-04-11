@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDamage : MonoBehaviour
+public class SlimeDamage : MonoBehaviour
 {
     public float damage;
     public float damagecd;
@@ -10,6 +10,7 @@ public class EnemyDamage : MonoBehaviour
     public float instdiff;
     public bool colliding;
     public float collct;
+    public float health;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,25 +20,11 @@ public class EnemyDamage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (colliding == false)
-            damagecd -= 1;
-        if(damage != instdiff)
+        health -= damage;
+        damage = 0;
+        if (health <= 0)
         {
-            damagecd = 20;
-            instdiff = damage;
-        }
-        if (damage != damagediff && colliding == false)
-        {
-            Debug.Log(damage-damagediff);
-            damagediff = damage;
-        }
-        if(collct == 0)
-        {
-            colliding = false;
-        }
-        else
-        {
-            colliding = true;
+            GetComponent<Animator>().SetBool("IsDead", true);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

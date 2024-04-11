@@ -14,6 +14,8 @@ public class SlimeBehavior : MonoBehaviour
     public float dtx;
     public float dto;
     public GameObject player;
+    public GameObject Death;
+    public float ParticleAmount;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,35 +30,45 @@ public class SlimeBehavior : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        dtg = GetComponent<Collider2D>().bounds.extents.y;
-        dto = -GetComponent<Collider2D>().offset.y;
-        dtx = GetComponent<Collider2D>().bounds.extents.x;
-        if (jumpenabled() == true)
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("Delete"))
         {
-            anim.SetBool("IsUp", false);
-            if(jt > 0)
+            int i = 0;
+            while (i < ParticleAmount)
             {
-                jt -= 1;
+                Instantiate(Death, transform.position, Quaternion.identity);
+                i++;
+            }
+            Destroy(gameObject);
+        }
+            dtg = GetComponent<Collider2D>().bounds.extents.y;
+            dto = -GetComponent<Collider2D>().offset.y;
+            dtx = GetComponent<Collider2D>().bounds.extents.x;
+            if (jumpenabled() == true)
+            {
+                anim.SetBool("IsUp", false);
+                if (jt > 0)
+                {
+                    jt -= 1;
+                }
+                else if(anim.GetBool("IsDead") == false)
+                {
+                    if (player.transform.position.x - transform.position.x > 0)
+                    {
+                        rb.AddForce(new Vector2(jumpvelx, jumpheight));
+                    }
+                    else
+                    {
+                        rb.AddForce(new Vector2(-jumpvelx, jumpheight));
+                    }
+                    jt = jumpwait;
+                }
             }
             else
             {
-                if(player.transform.position.x - transform.position.x > 0)
-                {
-                    rb.AddForce(new Vector2(jumpvelx, jumpheight));
-                }
-                else
-                {
-                    rb.AddForce(new Vector2(-jumpvelx, jumpheight));
-                }
-                jt = jumpwait;
+                anim.SetBool("IsUp", true);
+                //jt = jumpwait;
             }
-        }
-        else
-        {
-            anim.SetBool("IsUp", true);
-            //jt = jumpwait;
-        }
-        if(rb.velocity.y < 0)
+        if (rb.velocity.y < 0)
         {
             anim.SetBool("NegVel", true);
         }

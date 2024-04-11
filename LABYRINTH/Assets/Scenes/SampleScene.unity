@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 762113390}
   - component: {fileID: 762113389}
   - component: {fileID: 762113388}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SuperSize Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,6 +298,8 @@ MonoBehaviour:
   dtx: 0
   dto: 0
   player: {fileID: 0}
+  Death: {fileID: 7353610432084591217, guid: 0f829aea63bb54a1f929395f07564152, type: 3}
+  ParticleAmount: 75
 --- !u!95 &762113389
 Animator:
   serializedVersion: 5
@@ -409,6 +411,7 @@ MonoBehaviour:
   instdiff: 0
   colliding: 0
   collct: 0
+  health: 10000
 --- !u!61 &762113393
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -537,7 +540,7 @@ GameObject:
   - component: {fileID: 1053178673}
   - component: {fileID: 1053178672}
   - component: {fileID: 1053178671}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Giant Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -566,6 +569,8 @@ MonoBehaviour:
   dtx: 0
   dto: 0
   player: {fileID: 0}
+  Death: {fileID: 7353610432084591217, guid: 62b71d41550db4234a04259ca8eda94d, type: 3}
+  ParticleAmount: 75
 --- !u!95 &1053178672
 Animator:
   serializedVersion: 5
@@ -677,6 +682,7 @@ MonoBehaviour:
   instdiff: 0
   colliding: 0
   collct: 0
+  health: 6000
 --- !u!61 &1053178676
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3003,7 +3009,7 @@ GameObject:
   - component: {fileID: 1946533094}
   - component: {fileID: 1946533096}
   - component: {fileID: 1946533097}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3140,6 +3146,7 @@ MonoBehaviour:
   instdiff: 0
   colliding: 0
   collct: 0
+  health: 2000
 --- !u!50 &1946533094
 Rigidbody2D:
   serializedVersion: 4
@@ -3255,6 +3262,8 @@ MonoBehaviour:
   dtx: 0
   dto: 0
   player: {fileID: 0}
+  Death: {fileID: 7353610432084591217, guid: 0426b7192e52b4094a2b774484adfbb8, type: 3}
+  ParticleAmount: 75
 --- !u!1 &2097326054
 GameObject:
   m_ObjectHideFlags: 0
@@ -3271,7 +3280,7 @@ GameObject:
   - component: {fileID: 2097326057}
   - component: {fileID: 2097326056}
   - component: {fileID: 2097326055}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Big Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3300,6 +3309,8 @@ MonoBehaviour:
   dtx: 0
   dto: 0
   player: {fileID: 0}
+  Death: {fileID: 7353610432084591217, guid: fca4bad08af374e7ab084fa469153469, type: 3}
+  ParticleAmount: 75
 --- !u!95 &2097326056
 Animator:
   serializedVersion: 5
@@ -3411,6 +3422,7 @@ MonoBehaviour:
   instdiff: 0
   colliding: 0
   collct: 0
+  health: 4000
 --- !u!61 &2097326060
 BoxCollider2D:
   m_ObjectHideFlags: 0
