@@ -174,3 +174,5 @@ MonoBehaviour:
   rb: {fileID: 0}
   speed: 6
   rotspeed: 1
+  particletimer: 0
+  normaltimer: 3
