@@ -15,6 +15,7 @@ public class SlimeDamage : MonoBehaviour
     public GameObject Health;
     public float OBS;
     public float maxhealth;
+    public float attack;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,10 +53,14 @@ public class SlimeDamage : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D hitbox)
     {
-        if (hitbox.sharedMaterial != null)
+        if (hitbox.sharedMaterial != null && hitbox.isTrigger == true)
         {
             damage += (1 / (1 - hitbox.sharedMaterial.friction) - 1) * GameObject.FindWithTag("Player").GetComponent<StatManager>().strength;
             GetComponent<Rigidbody2D>().AddForce(18 * Vector3.Normalize(transform.position - GameObject.FindWithTag("Player").transform.position) * (1 / (1 - hitbox.sharedMaterial.bounciness) - 1));
+        }
+        if(hitbox.sharedMaterial != null && hitbox.isTrigger == false)
+        {
+            Debug.Log("HIT::HIT::HIT");
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
