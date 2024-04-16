@@ -1103,7 +1103,7 @@ MonoBehaviour:
   Health: {fileID: 200148012}
   OBS: 0
   maxhealth: 4000
-  attack: 0
+  attack: 20
 --- !u!61 &1092828254
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1465,7 +1465,7 @@ MonoBehaviour:
   Health: {fileID: 2026829886}
   OBS: 0
   maxhealth: 10000
-  attack: 0
+  attack: 50
 --- !u!61 &1538973779
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2101,7 +2101,7 @@ MonoBehaviour:
   Health: {fileID: 1649544596}
   OBS: 0
   maxhealth: 6000
-  attack: 0
+  attack: 30
 --- !u!61 &1852186787
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2267,6 +2267,7 @@ GameObject:
   - component: {fileID: 1883679069}
   - component: {fileID: 1883679071}
   - component: {fileID: 1883679070}
+  - component: {fileID: 1883679072}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -2379,7 +2380,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1883679026}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: e1f8b38a1c6f92c45b752e59391de486, type: 2}
+  m_Material: {fileID: 6200000, guid: 13293e57e55d1d84e8f6bd88e4f330f4, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -4310,6 +4311,26 @@ PolygonCollider2D:
       - {x: 1, y: -0.5}
       - {x: 0.25, y: -0.5}
   m_UseDelaunayMesh: 0
+--- !u!114 &1883679072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883679026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d5b744816cdbfa4e88ed8b3b6bec7c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  health: 0
+  maxhealth: 0
+  shield: 0
+  armor: 0
+  check: 0
+  healthregen: 0
+  hrtimer: 0
 --- !u!1 &1901372337
 GameObject:
   m_ObjectHideFlags: 0
@@ -4554,7 +4575,7 @@ MonoBehaviour:
   Health: {fileID: 764938057}
   OBS: 0
   maxhealth: 2000
-  attack: 0
+  attack: 10
 --- !u!50 &1946533094
 Rigidbody2D:
   serializedVersion: 4

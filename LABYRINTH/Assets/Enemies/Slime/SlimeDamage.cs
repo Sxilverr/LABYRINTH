@@ -60,7 +60,7 @@ public class SlimeDamage : MonoBehaviour
         }
         if(hitbox.sharedMaterial != null && hitbox.isTrigger == false)
         {
-            Debug.Log("HIT::HIT::HIT");
+            hitbox.gameObject.GetComponent<PlayerDamage>().damage = attack;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
