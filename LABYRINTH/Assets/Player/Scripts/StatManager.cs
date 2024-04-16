@@ -62,7 +62,7 @@ public class StatManager : MonoBehaviour
         manaR = (1 + manaRm) * manaC / 100f;
         manaE = (1 + manaEm) * (100 + manaEa);
         healthC = 100f + healthCa;
-        healthR = (1 + healthRm) * (Mathf.Log10(lightC - 99) + 1) * (healthC + healthRa) / 100f;
+        healthR = (1 + healthRm) * (Mathf.Log10(lightC) - 1) * (healthC + healthRa) / 100f;
         shield = (1 + shieldm) * shieldalloc / 10f;
         strength = (1 + strengthm) * (strengthalloc + 100 * (1 + strengtha));
         speed = 0.5f * (1 + mobilitym) * (100*Mathf.Log10(lightC) + mobilitya + 60*Mathf.Log(speedalloc/100+1));

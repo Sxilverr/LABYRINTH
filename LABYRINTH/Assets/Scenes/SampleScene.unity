@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &96896763
 Transform:
   m_ObjectHideFlags: 0
@@ -2506,7 +2506,7 @@ MonoBehaviour:
   healthRa: 0
   armor: 0
   shield: 0
-  shieldalloc: 0
+  shieldalloc: 200
   shieldm: 0
   strength: 0
   strengthalloc: 0
@@ -4331,6 +4331,8 @@ MonoBehaviour:
   check: 0
   healthregen: 0
   hrtimer: 0
+  lightc: 0
+  BV: {fileID: 96896762}
 --- !u!1 &1901372337
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,8 @@ public class PlayerDamage : MonoBehaviour
     public bool check;
     public float healthregen;
     public float hrtimer;
+    public float lightc;
+    public GameObject BV;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,9 +51,11 @@ public class PlayerDamage : MonoBehaviour
             check = true;
         }
         maxhealth = gameObject.GetComponent<StatManager>().healthC;
+        lightc = gameObject.GetComponent<StatManager>().lightC;
         armor = gameObject.GetComponent<StatManager>().armor;
         shield = gameObject.GetComponent<StatManager>().shield;
         healthregen = gameObject.GetComponent<StatManager>().healthR;
+        BV.transform.localScale = new Vector3(0.3f+Mathf.Pow(10*lightc, 0.33333333333f)*health/maxhealth/10f*0.7f, 0.3f + Mathf.Pow(10 * lightc, 0.33333333333f) * health / maxhealth / 10f * 0.7f, 0.3f + Mathf.Pow(10 * lightc, 0.33333333333f) * health / maxhealth / 10f * 0.7f);
         damage /= (100+armor);
         if(damage > 0 && shield == 0)
         {
@@ -62,12 +66,12 @@ public class PlayerDamage : MonoBehaviour
         {
             if(damage < shield)
             {
-                shield -= damage;
+                GetComponent<StatManager>().shieldalloc -= 10*damage;
                 damage = 0;
             } else
             {
                 damage -= shield;
-                shield = 0;
+                GetComponent<StatManager>().shieldalloc = 0;
                 health -= damage;
                 damage = 0;
             }
