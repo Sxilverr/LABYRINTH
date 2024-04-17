@@ -16,6 +16,7 @@ public class SlimeBehavior : MonoBehaviour
     public GameObject player;
     public GameObject Death;
     public float ParticleAmount;
+    public LayerMask ignore;
     // Start is called before the first frame update
     void Start()
     {
@@ -79,12 +80,12 @@ public class SlimeBehavior : MonoBehaviour
     }
     public bool jumpenabled()
     {
-        if (Physics2D.Raycast(transform.position, -Vector3.up, dtg + transform.localScale.y * dto + dtg + 0.05f) == true)
-            return Physics2D.Raycast(transform.position, -Vector3.up, dtg + transform.localScale.y * dto + dtg + 0.05f);
-        if (Physics2D.Raycast(new Vector3(transform.position.x - dtx + 0.05f, transform.position.y, transform.position.z), -Vector3.up, dtg + transform.localScale.y * dto + dtg + 0.05f))
-            return Physics2D.Raycast(new Vector3(transform.position.x - dtx + 0.05f, transform.position.y, transform.position.z), -Vector3.up, dtg + transform.localScale.y * dto + dtg + 0.05f);
-        if (Physics2D.Raycast(new Vector3(transform.position.x + dtx - 0.05f, transform.position.y, transform.position.z), -Vector3.up, dtg + transform.localScale.y * dto + dtg + 0.05f))
-            return Physics2D.Raycast(new Vector3(transform.position.x + dtx - 0.05f, transform.position.y, transform.position.z), -Vector3.up, dtg + transform.localScale.y * dto + dtg + 0.05f);
+        if (Physics2D.Raycast(transform.position, -Vector3.up, dtg + transform.localScale.y * dto + dtg + 0.05f, ~ignore) == true)
+            return Physics2D.Raycast(transform.position, -Vector3.up, dtg + transform.localScale.y * dto + dtg + 0.05f, ~ignore);
+        if (Physics2D.Raycast(new Vector3(transform.position.x - dtx + 0.05f, transform.position.y, transform.position.z), -Vector3.up, dtg + transform.localScale.y * dto + dtg + 0.05f, ~ignore))
+            return Physics2D.Raycast(new Vector3(transform.position.x - dtx + 0.05f, transform.position.y, transform.position.z), -Vector3.up, dtg + transform.localScale.y * dto + dtg + 0.05f, ~ignore);
+        if (Physics2D.Raycast(new Vector3(transform.position.x + dtx - 0.05f, transform.position.y, transform.position.z), -Vector3.up, dtg + transform.localScale.y * dto + dtg + 0.05f, ~ignore))
+            return Physics2D.Raycast(new Vector3(transform.position.x + dtx - 0.05f, transform.position.y, transform.position.z), -Vector3.up, dtg + transform.localScale.y * dto + dtg + 0.05f, ~ignore);
         return false;
     }
 }

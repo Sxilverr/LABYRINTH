@@ -53,6 +53,7 @@ public class Movement : MonoBehaviour
     public PolygonCollider2D sl;
     public GameObject arrow;
     public float vel;
+    public LayerMask particles;
     // Start is called before the first frame update
     void Start()
     {
@@ -653,12 +654,12 @@ public class Movement : MonoBehaviour
     }
     public bool jumpenabled()
     {
-        if(Physics2D.Raycast(transform.position, -Vector3.up, dtg + 0.05f)==true)
-            return Physics2D.Raycast(transform.position, -Vector3.up, dtg + 0.05f);
-        if (Physics2D.Raycast(new Vector3(transform.position.x - 0.3125f, transform.position.y, transform.position.z), -Vector3.up, dtg + 0.05f))
-            return Physics2D.Raycast(new Vector3(transform.position.x - 0.3125f, transform.position.y, transform.position.z), -Vector3.up, dtg + 0.05f);
-        if (Physics2D.Raycast(new Vector3(transform.position.x + 0.3125f, transform.position.y, transform.position.z), -Vector3.up, dtg + 0.05f))
-            return Physics2D.Raycast(new Vector3(transform.position.x + 0.3125f, transform.position.y, transform.position.z), -Vector3.up, dtg + 0.05f);
+        if(Physics2D.Raycast(transform.position, -Vector3.up, dtg + 0.05f, ~particles)==true)
+            return Physics2D.Raycast(transform.position, -Vector3.up, dtg + 0.05f, ~particles);
+        if (Physics2D.Raycast(new Vector3(transform.position.x - 0.3125f, transform.position.y, transform.position.z), -Vector3.up, dtg + 0.05f, ~particles))
+            return Physics2D.Raycast(new Vector3(transform.position.x - 0.3125f, transform.position.y, transform.position.z), -Vector3.up, dtg + 0.05f, ~particles);
+        if (Physics2D.Raycast(new Vector3(transform.position.x + 0.3125f, transform.position.y, transform.position.z), -Vector3.up, dtg + 0.05f, ~particles))
+            return Physics2D.Raycast(new Vector3(transform.position.x + 0.3125f, transform.position.y, transform.position.z), -Vector3.up, dtg + 0.05f, ~particles);
         return false;
     }
 }
