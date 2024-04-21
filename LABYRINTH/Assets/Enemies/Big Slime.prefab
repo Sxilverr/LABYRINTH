@@ -281,6 +281,7 @@ MonoBehaviour:
   ignore:
     serializedVersion: 2
     m_Bits: 192
+  followrange: {x: 32, y: 8}
 --- !u!1 &6300165720795384694
 GameObject:
   m_ObjectHideFlags: 0

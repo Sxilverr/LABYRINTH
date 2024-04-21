@@ -6,6 +6,6 @@ PhysicsMaterial2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: JabLow
-  friction: 0.3
-  bounciness: 0.4
+  m_Name: UpJab
+  friction: 0.55
+  bounciness: 0.8

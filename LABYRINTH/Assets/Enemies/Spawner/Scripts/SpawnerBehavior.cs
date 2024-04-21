@@ -24,7 +24,7 @@ public class SpawnerBehavior : MonoBehaviour
         {
             GetComponent<Animator>().SetBool("Spawn", true);
             Debug.Log("KJDAHGHFDHUAG");
-        } else if (GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip.name == "BaseState" && tt > 100)
+        } else if (GetComponent<SpriteRenderer>().sprite.name == "Base" && tt > 100)
         {
             GetComponent<Animator>().SetBool("Spawn", false);
         }

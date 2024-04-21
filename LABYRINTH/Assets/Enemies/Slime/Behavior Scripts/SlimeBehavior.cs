@@ -17,6 +17,7 @@ public class SlimeBehavior : MonoBehaviour
     public GameObject Death;
     public float ParticleAmount;
     public LayerMask ignore;
+    public Vector2 followrange;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,11 +48,11 @@ public class SlimeBehavior : MonoBehaviour
             if (jumpenabled() == true)
             {
                 anim.SetBool("IsUp", false);
-                if (jt > 0)
-                {
-                    jt -= 1;
-                }
-                else if(anim.GetBool("IsDead") == false)
+            if (jt > 0)
+            {
+                jt -= 1;
+            }
+            else if (anim.GetBool("IsDead") == false && (transform.position.x - player.transform.position.x) < followrange.x && (transform.position.y - player.transform.position.y) < followrange.y)
                 {
                     if (player.transform.position.x - transform.position.x > 0)
                     {
