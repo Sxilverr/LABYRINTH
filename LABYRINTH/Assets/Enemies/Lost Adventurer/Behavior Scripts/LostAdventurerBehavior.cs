@@ -13,6 +13,7 @@ public class LostAdventurerBehavior : MonoBehaviour
     public float attackstate;
     public float bowdist;
     public GameObject arrow;
+    public float minattackdist;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,7 +53,10 @@ public class LostAdventurerBehavior : MonoBehaviour
                     {
                         Instantiate(arrow, transform.position + new Vector3(-0.5f, -0.25f, 0), Quaternion.Euler(0, 0, 180));
                     }
-                    attackstate = 1;
+                    if (truedist <= minattackdist)
+                    {
+                        attackstate = 1;
+                    }
                 }
             }
         }

@@ -918,10 +918,11 @@ MonoBehaviour:
   anim: {fileID: 0}
   truedist: 0
   left: 0
-  mindist: 2
+  mindist: 1.5
   attackstate: 0
-  bowdist: 5
+  bowdist: 6
   arrow: {fileID: 5561682029840871065, guid: 0a31b5f0c285a4e63b272331dd56e5f7, type: 3}
+  minattackdist: 4
 --- !u!1 &1380582925
 GameObject:
   m_ObjectHideFlags: 0
