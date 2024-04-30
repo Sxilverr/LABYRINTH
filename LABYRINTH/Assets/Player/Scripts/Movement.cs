@@ -249,11 +249,6 @@ public class Movement : MonoBehaviour
                     }
                     anim.SetBool("BowF", false);
                 }
-                if(jumpenabled() == false)
-                {
-                    anim.SetBool("BowF", false);
-                    anim.SetBool("Nbow", false);
-                }
                 if (animst == "NBowFull")
                 {
                     if (anim.GetBool("Nbow") == true)

@@ -7,6 +7,7 @@ public class earrowvel : MonoBehaviour
     public Rigidbody2D rb;
     public float vel;
     public float tick;
+    public float damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +23,12 @@ public class earrowvel : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<PlayerDamage>().damage = damage;
+        }
         if (collision.gameObject.tag != "Enemy")
             Destroy(gameObject);
+        
     }
 }

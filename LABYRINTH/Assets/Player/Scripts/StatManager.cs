@@ -69,7 +69,9 @@ public class StatManager : MonoBehaviour
         jumph = 0.5f * (1 + mobilitym) * (100*Mathf.Log10(lightC) + mobilitya + 60*Mathf.Log(jumpalloc/100+1));
         Movement.speed = speed*3f;
         Movement.jump = jumph;
+        drawspd = speed + Mathf.Sqrt(strength) - 10;
         fps = 1/Time.deltaTime;
+        GetComponent<Animator>().SetFloat("DrawMult", drawspd / 100);
     }
     void FixedUpdate()
     {

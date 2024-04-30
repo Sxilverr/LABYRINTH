@@ -14,6 +14,10 @@ public class LostAdventurerBehavior : MonoBehaviour
     public float bowdist;
     public GameObject arrow;
     public float minattackdist;
+    public GameObject earrow;
+    public float arrowdamage;
+    public GameObject DeathParticle;
+    public float particleamt;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,9 +27,24 @@ public class LostAdventurerBehavior : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("DeathState") == true)
+        {
+            Destroy(gameObject);
+        }
+        if (anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Death")
+        {
+            int i = 0;
+            while (i < particleamt)
+            {
+                Instantiate(DeathParticle, transform.position, Quaternion.identity);
+                i++;
+            }
+            attackstate = 7;
+        }
         truedist = Vector3.Distance(transform.position, GameObject.FindWithTag("Player").transform.position);
-        if(attackstate == 0) {
-            if(truedist >= bowdist && truedist <= followdist && anim.GetBool("Bowing") == false)
+        if(attackstate == 0 && truedist <= followdist + 5) {
+            anim.SetBool("Jab", false);
+            if (truedist >= bowdist && truedist <= followdist && anim.GetBool("Bowing") == false)
             {
                 if (transform.position.x - GameObject.FindWithTag("Player").transform.position.x < 0)
                 {
@@ -48,11 +67,12 @@ public class LostAdventurerBehavior : MonoBehaviour
                     anim.SetBool("Bowing", false);
                     if(left == false)
                     {
-                        Instantiate(arrow, transform.position + new Vector3(0.5f, -0.0625f, 0), Quaternion.identity);
+                        earrow = Instantiate(arrow, transform.position + new Vector3(0.5f, -0.0625f, 0), Quaternion.identity);
                     } else
                     {
-                        Instantiate(arrow, transform.position + new Vector3(-0.5f, -0.25f, 0), Quaternion.Euler(0, 0, 180));
+                        earrow = Instantiate(arrow, transform.position + new Vector3(-0.5f, -0.25f, 0), Quaternion.Euler(0, 0, 180));
                     }
+                    earrow.GetComponent<earrowvel>().damage = arrowdamage;
                     if (truedist <= minattackdist)
                     {
                         attackstate = 1;
@@ -63,7 +83,7 @@ public class LostAdventurerBehavior : MonoBehaviour
         if (attackstate == 1)
         {
             anim.SetBool("Bowing", false);
-            if (truedist <= followdist && truedist > mindist)
+            if (truedist <= followdist && truedist > mindist && anim.GetBool("Jab") == false)
             {
                 if (transform.position.x - GameObject.FindWithTag("Player").transform.position.x < 0)
                 {
@@ -76,33 +96,34 @@ public class LostAdventurerBehavior : MonoBehaviour
                     transform.position -= new Vector3(speed / 50, 0, 0);
                 }
                 anim.SetBool("Running", true);
+                anim.SetBool("Jab", false);
+                if (truedist >= minattackdist)
+                {
+                    attackstate = 0;
+                }
             }
             else
             {
                 anim.SetBool("Running", false);
-            }
-            if (truedist <= followdist + 5)
-            {
-                if (transform.position.x - GameObject.FindWithTag("Player").transform.position.x < 0)
+                if (transform.position.y - GameObject.FindWithTag("Player").transform.position.y < 1)
                 {
-                    left = false;
-                }
-                else
+                    anim.SetBool("Jab", true);
+                    if (left == true)
+                    {
+                        transform.position -= new Vector3(speed / 40, 0, 0);
+                    }
+                    else
+                    {
+                        transform.position += new Vector3(speed / 40, 0, 0);
+                    }
+                    if (anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == "JabFinalState")
+                    {
+                        anim.SetBool("Jab", false);
+                    }
+                } else
                 {
-                    left = true;
+                    //neutral swing to hit above
                 }
-            }
-
-        }
-        if (truedist <= followdist + 5)
-        {
-            if (transform.position.x - GameObject.FindWithTag("Player").transform.position.x < 0)
-            {
-                left = false;
-            }
-            else
-            {
-                left = true;
             }
         }
         if (left == true)
