@@ -974,6 +974,8 @@ GameObject:
   - component: {fileID: 1761108974}
   - component: {fileID: 1761108973}
   - component: {fileID: 1761108972}
+  - component: {fileID: 1761108977}
+  - component: {fileID: 1761108976}
   m_Layer: 0
   m_Name: Dark Serpent
   m_TagString: Untagged
@@ -1114,6 +1116,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1761108976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761108971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e45baebbfc3452ea0f4ac3c9b98787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 6
+  followdist: 20
+  anim: {fileID: 0}
+  truedist: 0
+  left: 0
+  mindist: 0
+  attackstate: 0
+  bowdist: 0
+  arrow: {fileID: 0}
+  minattackdist: 0
+  earrow: {fileID: 0}
+  arrowdamage: 0
+  DeathParticle: {fileID: 0}
+  particleamt: 0
+--- !u!50 &1761108977
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761108971}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 3
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &1883679026
 GameObject:
   m_ObjectHideFlags: 0
