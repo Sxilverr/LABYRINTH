@@ -63,19 +63,20 @@ public class SnakeBehavior : MonoBehaviour
             {
                 anim.SetBool("Running", false);
                 anim.SetBool("Bowing", true);
-                if(anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == "BowFullState") {
+                if(anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Shooting") {
                     anim.SetBool("Bowing", false);
-                    if(left == false)
+                    if (left == false)
                     {
-                        earrow = Instantiate(arrow, transform.position + new Vector3(0.5f, -0.0625f, 0), Quaternion.identity);
+                        earrow = Instantiate(arrow, transform.position + new Vector3(1f, -0.0625f, 0), Quaternion.identity);
                     } else
                     {
-                        earrow = Instantiate(arrow, transform.position + new Vector3(-0.5f, -0.25f, 0), Quaternion.Euler(0, 0, 180));
+                        earrow = Instantiate(arrow, transform.position + new Vector3(-1f, -0.25f, 0), Quaternion.Euler(0, 0, 180));
                     }
-                    earrow.GetComponent<earrowvel>().damage = arrowdamage;
+                    earrow.GetComponent<ProjBeh>().damage = arrowdamage;
                     if (truedist <= minattackdist)
                     {
                         attackstate = 1;
+                        Debug.Log("Changed");
                     }
                 }
             }
@@ -116,7 +117,7 @@ public class SnakeBehavior : MonoBehaviour
                     {
                         transform.position += new Vector3(speed / 40, 0, 0);
                     }
-                    if (anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == "JabFinalState")
+                    if (anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Jabend")
                     {
                         anim.SetBool("Jab", false);
                     }

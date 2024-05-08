@@ -976,9 +976,9 @@ GameObject:
   - component: {fileID: 1761108972}
   - component: {fileID: 1761108977}
   - component: {fileID: 1761108976}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dark Serpent
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1015,7 +1015,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.1875}
+  m_Offset: {x: 0, y: -0.25}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1026,7 +1026,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.875, y: 0.625}
+  m_Size: {x: 1.875, y: 0.5}
   m_EdgeRadius: 0
 --- !u!95 &1761108973
 Animator:
@@ -1110,7 +1110,7 @@ Transform:
   m_GameObject: {fileID: 1761108971}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 0, z: 0}
+  m_LocalPosition: {x: 10, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1133,11 +1133,11 @@ MonoBehaviour:
   anim: {fileID: 0}
   truedist: 0
   left: 0
-  mindist: 0
+  mindist: 2
   attackstate: 0
-  bowdist: 0
-  arrow: {fileID: 0}
-  minattackdist: 0
+  bowdist: 6
+  arrow: {fileID: 1961622805775560268, guid: 10533927d739542659fc596fdf5f6e2d, type: 3}
+  minattackdist: 5
   earrow: {fileID: 0}
   arrowdamage: 0
   DeathParticle: {fileID: 0}
