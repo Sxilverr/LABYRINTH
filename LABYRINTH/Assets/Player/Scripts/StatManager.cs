@@ -41,13 +41,14 @@ public class StatManager : MonoBehaviour
     public float jumph;
     public float mobilitym;
     public float mobilitya;
-    public float mobilityalloc;
     public float speedalloc;
     public float jumpalloc;
 
     public float drawspd;
     public float fps;
     public float ffps;
+    public float manafree;
+    public float usablemana;
     // Start is called before the first frame update
     void Start()
     {
@@ -66,12 +67,13 @@ public class StatManager : MonoBehaviour
         shield = (1 + shieldm) * shieldalloc / 10f;
         strength = (1 + strengthm) * (strengthalloc + 100 * (1 + strengtha));
         speed = 0.5f * (1 + mobilitym) * (100*Mathf.Log10(lightC) + mobilitya + 60*Mathf.Log(speedalloc/100+1));
-        jumph = 0.5f * (1 + mobilitym) * (100*Mathf.Log10(lightC) + mobilitya + 60*Mathf.Log(jumpalloc/100+1));
+        jumph = 0.25f * (1 + mobilitym) * (100*Mathf.Log10(lightC) + mobilitya + 60*Mathf.Log(jumpalloc/100+1))+50;
         Movement.speed = speed*3f;
         Movement.jump = jumph;
         drawspd = speed + Mathf.Sqrt(strength) - 10;
         fps = 1/Time.deltaTime;
         GetComponent<Animator>().SetFloat("DrawMult", drawspd / 100);
+        manafree = manaC - shieldalloc - strengthalloc - jumpalloc - speedalloc;
     }
     void FixedUpdate()
     {

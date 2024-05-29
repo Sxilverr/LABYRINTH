@@ -64,7 +64,14 @@ public class SpawnerDamage : MonoBehaviour
     {
         if (hitbox.sharedMaterial != null && hitbox.isTrigger == true)
         {
-            damage += (1 / (1 - hitbox.sharedMaterial.friction) - 1) * GameObject.FindWithTag("Player").GetComponent<StatManager>().strength;
+            if (hitbox.gameObject.tag != "MagicProj")
+            {
+                damage += (1 / (1 - hitbox.sharedMaterial.friction) - 1) * GameObject.FindWithTag("Player").GetComponent<StatManager>().strength;
+            }
+            else
+            {
+                damage += (1 / (1 - hitbox.sharedMaterial.friction) - 1) * GameObject.FindWithTag("Player").GetComponent<ManaManager>().manamax / 5 +80;
+            }
         }
         if(hitbox.sharedMaterial != null && hitbox.isTrigger == false)
         {

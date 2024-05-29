@@ -66,7 +66,7 @@ public class Movement : MonoBehaviour
     void FixedUpdate()
     {
         dtg = GetComponent<Collider2D>().bounds.extents.y;
-        if (animst == "DownAir" || animst == "Nair" || animst == "Fair" || animst == "UpAir")
+        if (animst == "DownAir" || animst == "Nair" || animst == "Fair" || animst == "UpAir" || (animst == "MagicCast" && jumpenabled() == false))
         {
             if (Input.GetKey(KeyCode.D))
             {
@@ -81,7 +81,7 @@ public class Movement : MonoBehaviour
                 rb.AddForce(new Vector3(0, -ff, 0));
             }
         }
-        if (animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false)
+        if (animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false && animst != "MagicCast")
         {
             if (Input.GetKey(KeyCode.D))
             {
@@ -174,7 +174,7 @@ public class Movement : MonoBehaviour
         vel = Mathf.Abs(rb.velocity.y);
         daoir.sharedMaterial.friction = (0.95f * vel) / (1f * vel + 1)-0.1f;
         asp = GetComponent<SpriteRenderer>().sprite;
-        if (animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "DownSlash" && animst != "UpJab" && animst != "Shidle" && animst != "Shrun" && animst != "ShackRun")
+        if (animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "DownSlash" && animst != "UpJab" && animst != "Shidle" && animst != "Shrun" && animst != "ShackRun" && animst != "MagicCast")
         {
             if (Input.GetKeyDown(KeyCode.E) && !(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow)))
             {
@@ -204,7 +204,7 @@ public class Movement : MonoBehaviour
             {
                 anim.SetBool("BowF", true);
             }
-            if (Input.GetKeyDown(KeyCode.Q) && (Input.GetKey(KeyCode.UpArrow)) && animst != "NBow" && animst != "NBowFull" && animst != "BowDraw" && animst != "BowFull" && animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir")
+            if (Input.GetKeyDown(KeyCode.Q) && (Input.GetKey(KeyCode.UpArrow)) && animst != "NBow" && animst != "NBowFull" && animst != "BowDraw" && animst != "BowFull" && animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "MagicCast")
             {
                 if (left == true)
                 {
@@ -216,7 +216,7 @@ public class Movement : MonoBehaviour
                     anim.SetBool("Nbow", true);
                 }
             }
-            if (Input.GetKeyDown(KeyCode.Q) && (Input.GetKey(KeyCode.DownArrow)) && animst != "NBow" && animst != "NBowFull" && animst != "BowDraw" && animst != "BowFull" && animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir")
+            if (Input.GetKeyDown(KeyCode.Q) && (Input.GetKey(KeyCode.DownArrow)) && animst != "NBow" && animst != "NBowFull" && animst != "BowDraw" && animst != "BowFull" && animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "MagicCast")
             {
                 if (left == true)
                 {
@@ -289,11 +289,11 @@ public class Movement : MonoBehaviour
             GetComponent<SpriteRenderer>().flipX = false;
         }
         ff = jump / 2;
-        if (jumpenabled() && Input.GetKeyDown(KeyCode.Space) && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull")
+        if (jumpenabled() && Input.GetKeyDown(KeyCode.Space) && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && animst != "MagicCast")
         {
             rb.AddForce(new Vector3(0, 4*jump, 0));
         }
-        if (!jumpenabled() && Input.GetKeyDown(KeyCode.Space) && doublejump == true && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull")
+        if (!jumpenabled() && Input.GetKeyDown(KeyCode.Space) && doublejump == true && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && animst != "MagicCast")
         {
             rb.velocity=(new Vector3(rb.velocity.x, jump/10f, 0));
             doublejump = false;

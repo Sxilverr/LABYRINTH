@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerDamage : MonoBehaviour
 {
@@ -14,6 +16,9 @@ public class PlayerDamage : MonoBehaviour
     public float hrtimer;
     public float lightc;
     public GameObject BV;
+    public Image Healthbar;
+    public TMP_Text Healthtext;
+    public float initwidth;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +27,7 @@ public class PlayerDamage : MonoBehaviour
         shield = gameObject.GetComponent<StatManager>().shield;
         health = maxhealth;
         hrtimer = 0;
+        initwidth = Healthbar.rectTransform.rect.width;
     }
 
     private void FixedUpdate()
@@ -43,6 +49,9 @@ public class PlayerDamage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Healthbar.rectTransform.localScale = new Vector2(health/maxhealth, 1);
+        Healthbar.rectTransform.position = new Vector2(106 - 0f*(initwidth*(1 - health / maxhealth)), 22);
+        Healthtext.text = (Mathf.Round(health*10)/10) + " / " + Mathf.Round(maxhealth*10)/10;
         if (check == false && maxhealth != 0) {
             maxhealth = gameObject.GetComponent<StatManager>().healthC;
             armor = gameObject.GetComponent<StatManager>().armor;
