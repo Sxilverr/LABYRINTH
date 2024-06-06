@@ -53,7 +53,7 @@ public class SlimeDamage : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D hitbox)
     {
-        if (hitbox.sharedMaterial != null && hitbox.isTrigger == true)
+        if (hitbox.sharedMaterial != null && hitbox.isTrigger == true && hitbox.gameObject.tag != "SwordMagicProj")
         {
             if (hitbox.gameObject.tag != "MagicProj")
             {
@@ -75,6 +75,10 @@ public class SlimeDamage : MonoBehaviour
         if(collision.sharedMaterial != null)
         {
             collct += 1;
+        }
+        if (collision.gameObject.tag == "SwordMagicProj")
+        {
+            damage += (1 / (1 - collision.sharedMaterial.friction) - 1) * GameObject.FindWithTag("Player").GetComponent<ManaManager>().manamax / 5 + 80;
         }
     }
 }

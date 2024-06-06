@@ -16,11 +16,16 @@ public class ManaManager : MonoBehaviour
     public KeyCode fireball;
     public KeyCode bigfireballk;
     public KeyCode explodek;
+    public KeyCode toggles;
     public GameObject Fireball;
     public GameObject bigfireball;
     public GameObject explosion;
     public Animator anim;
     public string animst;
+    public float sfbc;
+    public float lfbc;
+    public float spc;
+    public float expc;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +34,7 @@ public class ManaManager : MonoBehaviour
         mana = manamax;
         initwidth = Manabar.rectTransform.rect.width;
         anim = GetComponent<Animator>();
+        GetComponent<Movement>().swingcost = spc;
     }
 
     // Update is called once per frame
@@ -56,16 +62,26 @@ public class ManaManager : MonoBehaviour
             mana = manamax;
             doneyet = true;
         }
+        if (Input.GetKeyDown(toggles))
+        {
+            if(GetComponent<Movement>().swordproj == true)
+            {
+                GetComponent<Movement>().swordproj = false;
+            } else
+            {
+                GetComponent<Movement>().swordproj = true;
+            }
+        }
         anim.SetBool("Magic", false);
         manamax = GetComponent<StatManager>().manafree;
         regen = GetComponent<StatManager>().manaR;
         Manabar.rectTransform.localScale = new Vector2(mana / manamax, 1);
         Manabar.rectTransform.position = Manatext.transform.position;
         Manatext.text = (Mathf.Round(mana * 10) / 10) + " / " + Mathf.Round(manamax * 10) / 10;
-        if (Input.GetKeyDown(fireball) && mana >= 10 && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false && animst != "MagicCast")
+        if (Input.GetKeyDown(fireball) && mana >= sfbc && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false && animst != "MagicCast")
         {
             anim.SetBool("Magic", true);
-            mana -= 10;
+            mana -= sfbc;
             Debug.Log("BALL");
             if (GetComponent<Movement>().left == false)
             {
@@ -77,10 +93,10 @@ public class ManaManager : MonoBehaviour
                 ball.transform.Rotate(0, 0, 180);
             }
         }
-        if (Input.GetKeyDown(bigfireballk) && mana >= 20 && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false && animst != "MagicCast")
+        if (Input.GetKeyDown(bigfireballk) && mana >= lfbc && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false && animst != "MagicCast")
         {
             anim.SetBool("Magic", true);
-            mana -= 20;
+            mana -= lfbc;
             if (GetComponent<Movement>().left == false)
             {
                 GameObject ball = Instantiate(bigfireball, transform.position, Quaternion.identity);
@@ -94,10 +110,10 @@ public class ManaManager : MonoBehaviour
             }
             Debug.Log("BIG BALL");
         }
-        if (Input.GetKeyDown(explodek) && mana >= 100 && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false && animst != "MagicCast")
+        if (Input.GetKeyDown(explodek) && mana >= expc && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false && animst != "MagicCast")
         {
             anim.SetBool("Magic", true);
-            mana -= 100;
+            mana -= expc;
             Instantiate(explosion, transform.position, Quaternion.identity);
             Debug.Log("BIG BALL");
         }

@@ -2120,6 +2120,9 @@ MonoBehaviour:
   particles:
     serializedVersion: 2
     m_Bits: 68
+  swordproj: 1
+  SP: {fileID: 9157868364669358520, guid: 7f8e836c6cdde4c6a90e862fbf694b87, type: 3}
+  swingcost: 0
 --- !u!114 &1883679034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4004,11 +4007,16 @@ MonoBehaviour:
   fireball: 102
   bigfireballk: 103
   explodek: 114
+  toggles: 109
   Fireball: {fileID: 2114446073517247048, guid: f2494ce02f7b4411aa6bcfdfba03cd3d, type: 3}
   bigfireball: {fileID: 8398756938277699782, guid: 02bc2ba2879e04803b72ff80c194e427, type: 3}
   explosion: {fileID: 5639844345856039206, guid: 344c1354829ec42c0aa663e80f00c301, type: 3}
   anim: {fileID: 0}
   animst: 
+  sfbc: 10
+  lfbc: 20
+  spc: 10
+  expc: 100
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

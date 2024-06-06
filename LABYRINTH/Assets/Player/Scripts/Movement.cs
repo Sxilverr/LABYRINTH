@@ -54,6 +54,9 @@ public class Movement : MonoBehaviour
     public GameObject arrow;
     public float vel;
     public LayerMask particles;
+    public bool swordproj;
+    public GameObject SP;
+    public float swingcost;
     // Start is called before the first frame update
     void Start()
     {
@@ -181,24 +184,76 @@ public class Movement : MonoBehaviour
                 Debug.Log("ATK");
                 anim.SetBool("Attack", true);
                 anim.SetBool("Nair", true);
+                if (GetComponent<ManaManager>().mana >= swingcost && swordproj == true)
+                {
+                    GetComponent<ManaManager>().mana -= swingcost;
+                    if (left == true)
+                    {
+                        GameObject narrow = Instantiate(SP, transform.position, Quaternion.identity);
+                        narrow.transform.Rotate(0, 0, 90);
+                    }
+                    else
+                    {
+                        Instantiate(SP, transform.position, Quaternion.identity);
+                    }
+                }
+                
             }
             if (Input.GetKeyDown(KeyCode.E) && (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow)))
             {
                 Debug.Log("ATK");
                 anim.SetBool("Jab", true);
                 anim.SetBool("Fair", true);
+                if (GetComponent<ManaManager>().mana >= swingcost && swordproj == true)
+                {
+                    GetComponent<ManaManager>().mana -= swingcost;
+                    if (left == true)
+                    {
+                        GameObject narrow = Instantiate(SP, transform.position, Quaternion.identity);
+                        narrow.transform.Rotate(0, 0, 135);
+                    }
+                    else
+                    {
+                        GameObject narrow = Instantiate(SP, transform.position, Quaternion.identity);
+                        narrow.transform.Rotate(0, 0, -45);
+                    }
+                }
             }
             if (Input.GetKeyDown(KeyCode.E) && (Input.GetKey(KeyCode.UpArrow)))
             {
                 Debug.Log("ATK");
                 anim.SetBool("UpJab", true);
                 anim.SetBool("Uair", true);
+                if (GetComponent<ManaManager>().mana >= swingcost && swordproj == true)
+                {
+                    GetComponent<ManaManager>().mana -= swingcost;
+                    GameObject narrow = Instantiate(SP, transform.position, Quaternion.identity);
+                    narrow.transform.Rotate(0, 0, 45);
+                }
             }
             if (Input.GetKeyDown(KeyCode.E) && (Input.GetKey(KeyCode.DownArrow)))
             {
                 Debug.Log("ATK");
                 anim.SetBool("DownSlash", true);
                 anim.SetBool("Dair", true);
+                if (GetComponent<ManaManager>().mana >= swingcost && swordproj == true)
+                {
+                  
+                    if (jumpenabled() == true && GetComponent<ManaManager>().mana >= 2*swingcost)
+                    {
+                        GetComponent<ManaManager>().mana -= 2*swingcost;
+                        GameObject narrow = Instantiate(SP, transform.position, Quaternion.identity);
+                        narrow.transform.Rotate(0, 0, -45);
+                        GameObject nearrow = Instantiate(SP, transform.position, Quaternion.identity);
+                        nearrow.transform.Rotate(0, 0, 135);
+                    }
+                    else if (jumpenabled() == false)
+                    {
+                        GetComponent<ManaManager>().mana -= swingcost;
+                        GameObject narrow = Instantiate(SP, transform.position, Quaternion.identity);
+                        narrow.transform.Rotate(0, 0, -135);
+                    }
+                }
             }
             if (Input.GetKeyDown(KeyCode.Q) && (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow)))
             {
