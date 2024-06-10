@@ -4016,7 +4016,7 @@ MonoBehaviour:
   sfbc: 10
   lfbc: 20
   spc: 10
-  expc: 100
+  expc: 80
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
