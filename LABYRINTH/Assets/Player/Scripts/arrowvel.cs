@@ -7,6 +7,7 @@ public class arrowvel : MonoBehaviour
     public Rigidbody2D rb;
     public float vel;
     public float tick;
+    public GameObject explosion;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +24,11 @@ public class arrowvel : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.gameObject.tag != "Player" && collision.gameObject.layer != 6)
+            if(GameObject.FindWithTag("Player").GetComponent<Movement>().bowexp == true)
+            {
+                Instantiate(explosion, transform.position, Quaternion.identity);
+                GameObject.FindWithTag("Player").GetComponent<ManaManager>().mana -= GameObject.FindWithTag("Player").GetComponent<ManaManager>().bowc;
+            }
             Destroy(gameObject);
 
     }

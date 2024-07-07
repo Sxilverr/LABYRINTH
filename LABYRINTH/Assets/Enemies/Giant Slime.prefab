@@ -160,7 +160,7 @@ MonoBehaviour:
   Health: {fileID: 7810962910842795501}
   OBS: 0
   maxhealth: 6000
-  attack: 30
+  attack: 70
 --- !u!61 &8156373887030598159
 BoxCollider2D:
   m_ObjectHideFlags: 0

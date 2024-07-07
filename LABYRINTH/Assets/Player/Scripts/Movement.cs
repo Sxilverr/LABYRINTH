@@ -55,8 +55,11 @@ public class Movement : MonoBehaviour
     public float vel;
     public LayerMask particles;
     public bool swordproj;
+ 
     public GameObject SP;
     public float swingcost;
+    public bool bowexp;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -184,7 +187,7 @@ public class Movement : MonoBehaviour
                 Debug.Log("ATK");
                 anim.SetBool("Attack", true);
                 anim.SetBool("Nair", true);
-                if (GetComponent<ManaManager>().mana >= swingcost && swordproj == true)
+                if (GetComponent<ManaManager>().mana >= swingcost && swordproj == true && animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false && animst != "MagicCast")
                 {
                     GetComponent<ManaManager>().mana -= swingcost;
                     if (left == true)
@@ -204,7 +207,7 @@ public class Movement : MonoBehaviour
                 Debug.Log("ATK");
                 anim.SetBool("Jab", true);
                 anim.SetBool("Fair", true);
-                if (GetComponent<ManaManager>().mana >= swingcost && swordproj == true)
+                if (GetComponent<ManaManager>().mana >= swingcost && swordproj == true && animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false && animst != "MagicCast")
                 {
                     GetComponent<ManaManager>().mana -= swingcost;
                     if (left == true)
@@ -224,7 +227,7 @@ public class Movement : MonoBehaviour
                 Debug.Log("ATK");
                 anim.SetBool("UpJab", true);
                 anim.SetBool("Uair", true);
-                if (GetComponent<ManaManager>().mana >= swingcost && swordproj == true)
+                if (GetComponent<ManaManager>().mana >= swingcost && swordproj == true && animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false && animst != "MagicCast")
                 {
                     GetComponent<ManaManager>().mana -= swingcost;
                     GameObject narrow = Instantiate(SP, transform.position, Quaternion.identity);
@@ -236,7 +239,7 @@ public class Movement : MonoBehaviour
                 Debug.Log("ATK");
                 anim.SetBool("DownSlash", true);
                 anim.SetBool("Dair", true);
-                if (GetComponent<ManaManager>().mana >= swingcost && swordproj == true)
+                if (GetComponent<ManaManager>().mana >= swingcost && swordproj == true && animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false && animst != "MagicCast")
                 {
                   
                     if (jumpenabled() == true && GetComponent<ManaManager>().mana >= 2*swingcost)

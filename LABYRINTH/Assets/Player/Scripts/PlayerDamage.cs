@@ -16,6 +16,7 @@ public class PlayerDamage : MonoBehaviour
     public float hrtimer;
     public float lightc;
     public GameObject BV;
+    public GameObject Cover;
     public Image Healthbar;
     public TMP_Text Healthtext;
     public float initwidth;
@@ -59,6 +60,11 @@ public class PlayerDamage : MonoBehaviour
             health = maxhealth;
             check = true;
         }
+        if(health < 0)
+        {
+            health = 0;
+        }
+        Cover.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, Mathf.Pow(Mathf.Sqrt(maxhealth)-Mathf.Sqrt(health), 2)/maxhealth);
         maxhealth = gameObject.GetComponent<StatManager>().healthC;
         lightc = gameObject.GetComponent<StatManager>().lightC;
         armor = gameObject.GetComponent<StatManager>().armor;

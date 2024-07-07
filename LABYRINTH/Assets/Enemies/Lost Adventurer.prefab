@@ -324,7 +324,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   names: 
   left: 0
-  attackdmg: 40
+  attackdmg: 60
   r1: {fileID: 9009549624406300285}
   r2: {fileID: 4595033714256833510}
   r3: {fileID: 8233229440729358469}
@@ -636,7 +636,7 @@ MonoBehaviour:
   arrow: {fileID: 5561682029840871065, guid: 0a31b5f0c285a4e63b272331dd56e5f7, type: 3}
   minattackdist: 6
   earrow: {fileID: 0}
-  arrowdamage: 10
+  arrowdamage: 500
   DeathParticle: {fileID: 7353610432084591217, guid: ef89c47fe2242451ea1cf8f59839a8fe, type: 3}
   particleamt: 4
 --- !u!61 &3930346651786754876

@@ -61,7 +61,7 @@ public class SlimeDamage : MonoBehaviour
             }
             else
             {
-                damage += (1 / (1 - hitbox.sharedMaterial.friction) - 1) * GameObject.FindWithTag("Player").GetComponent<ManaManager>().manamax / 5 + 80;
+                damage += (1 / (1 - hitbox.sharedMaterial.friction) - 1) * (GameObject.FindWithTag("Player").GetComponent<ManaManager>().manamax / 5 + 80);
             }
             GetComponent<Rigidbody2D>().AddForce(18 * Vector3.Normalize(transform.position - GameObject.FindWithTag("Player").transform.position) * (1 / (1 - hitbox.sharedMaterial.bounciness) - 1));
         }

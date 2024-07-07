@@ -94,9 +94,9 @@ MonoBehaviour:
   anim: {fileID: 0}
   names: 
   left: 0
-  attackdmg: 30
+  attackdmg: 70
   r1: {fileID: 5765888157957192491}
-  k: 30
+  k: 20
 --- !u!1 &4092354902352522611
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,7 +389,7 @@ MonoBehaviour:
   arrow: {fileID: 1961622805775560268, guid: 10533927d739542659fc596fdf5f6e2d, type: 3}
   minattackdist: 5
   earrow: {fileID: 0}
-  arrowdamage: 0
+  arrowdamage: 700
   DeathParticle: {fileID: 7353610432084591217, guid: a8a26e7c5548a4ca3a299cecc9c9eada, type: 3}
   particleamt: 2
 --- !u!114 &7529257956068138146

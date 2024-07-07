@@ -17,15 +17,20 @@ public class ManaManager : MonoBehaviour
     public KeyCode bigfireballk;
     public KeyCode explodek;
     public KeyCode toggles;
+    public KeyCode be;
+    public KeyCode beam;
     public GameObject Fireball;
     public GameObject bigfireball;
     public GameObject explosion;
+    public GameObject beamp;
     public Animator anim;
     public string animst;
     public float sfbc;
     public float lfbc;
     public float spc;
     public float expc;
+    public float bowc;
+    public float beac;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,7 +61,18 @@ public class ManaManager : MonoBehaviour
 
     void Update()
     {
-        animst = anim.GetCurrentAnimatorClipInfo(0)[0].clip.name;
+        if (Input.GetKeyDown(be))
+        {
+            if (GetComponent<Movement>().bowexp == true)
+            {
+                GetComponent<Movement>().bowexp = false;
+            }
+            else
+            {
+                GetComponent<Movement>().bowexp = true;
+            }
+        }
+            animst = anim.GetCurrentAnimatorClipInfo(0)[0].clip.name;
         if (manamax != 0 && doneyet == false)
         {
             mana = manamax;
@@ -107,6 +123,23 @@ public class ManaManager : MonoBehaviour
                 GameObject ball = Instantiate(bigfireball, transform.position, Quaternion.identity);
                 ball.transform.Rotate(0, 0, 180);
                 ball.transform.position -= new Vector3(0.5f, 0, 0);
+            }
+            Debug.Log("BIG BALL");
+        }
+        if (Input.GetKeyDown(beam) && mana >= lfbc && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false && animst != "MagicCast")
+        {
+            anim.SetBool("Magic", true);
+            mana -= beac;
+            if (GetComponent<Movement>().left == false)
+            {
+                GameObject ball = Instantiate(beamp, transform.position, Quaternion.identity);
+                ball.transform.position += new Vector3(8.5f, -0.25f, 0);
+            }
+            else
+            {
+                GameObject ball = Instantiate(beamp, transform.position, Quaternion.identity);
+                ball.transform.Rotate(0, 0, 180);
+                ball.transform.position -= new Vector3(8.5f, 0.25f, 0);
             }
             Debug.Log("BIG BALL");
         }
