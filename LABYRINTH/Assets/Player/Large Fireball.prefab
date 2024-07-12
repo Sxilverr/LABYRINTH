@@ -168,6 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   vel: 15
+  accel: 0
   tick: 0
   explosion: {fileID: 5639844345856039206, guid: 2a2bd78a2b0a34b18b7c2b38fd7a305b, type: 3}
 --- !u!50 &4517234311801369305

@@ -6,6 +6,7 @@ public class FireballBehavior : MonoBehaviour
 {
     public Rigidbody2D rb;
     public float vel;
+    public float accel;
     public float tick;
     public GameObject explosion;
     // Start is called before the first frame update
@@ -17,9 +18,10 @@ public class FireballBehavior : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-
+        Vector2 bhlo = transform.right * accel;
+        rb.velocity = rb.velocity + bhlo;
     }
     private void OnTriggerStay2D(Collider2D collision)
     {

@@ -59,6 +59,7 @@ public class Movement : MonoBehaviour
     public GameObject SP;
     public float swingcost;
     public bool bowexp;
+    public bool tripleshot;
 
     // Start is called before the first frame update
     void Start()
@@ -299,10 +300,24 @@ public class Movement : MonoBehaviour
                     {
                         if (left == false)
                         {
+                            
                             Instantiate(arrow, transform.position + new Vector3(0.5f, -0.0625f, 0), Quaternion.identity);
+                            if(tripleshot == true && GetComponent<ManaManager>().mana >= GetComponent<ManaManager>().tsc)
+                            {
+                                Instantiate(arrow, transform.position + new Vector3(0.5f, -0.0625f, 0), Quaternion.Euler(0, 0, 15));
+                                Instantiate(arrow, transform.position + new Vector3(0.5f, -0.0625f, 0), Quaternion.Euler(0, 0, -15));
+
+                                GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().tsc;
+                            }
                         } else
                         {
                             Instantiate(arrow, transform.position + new Vector3(-0.5f, -0.25f, 0), Quaternion.Euler(0, 0, 180));
+                            if (tripleshot == true && GetComponent<ManaManager>().mana >= GetComponent<ManaManager>().tsc)
+                            {
+                                Instantiate(arrow, transform.position + new Vector3(-0.5f, -0.25f, 0), Quaternion.Euler(0, 0, 195));
+                                Instantiate(arrow, transform.position + new Vector3(-0.5f, -0.25f, 0), Quaternion.Euler(0, 0, 165));
+                                GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().tsc;
+                            }
                         }
                     }
                     anim.SetBool("BowF", false);
@@ -314,10 +329,22 @@ public class Movement : MonoBehaviour
                         if (left == false)
                         {
                             Instantiate(arrow, transform.position + new Vector3(0.4375f, .1875f, 0), Quaternion.Euler(0, 0, 45));
+                            if (tripleshot == true && GetComponent<ManaManager>().mana >= GetComponent<ManaManager>().tsc)
+                            {
+                                Instantiate(arrow, transform.position + new Vector3(0.4375f, .1875f, 0), Quaternion.Euler(0, 0, 60));
+                                Instantiate(arrow, transform.position + new Vector3(0.4375f, .1875f, 0), Quaternion.Euler(0, 0, 30));
+                                GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().tsc;
+                            }
                         }
                         else
                         {
                             Instantiate(arrow, transform.position + new Vector3(-0.4375f, -0.0625f, 0), Quaternion.Euler(0, 0, 135));
+                            if (tripleshot == true && GetComponent<ManaManager>().mana >= GetComponent<ManaManager>().tsc)
+                            {
+                                Instantiate(arrow, transform.position + new Vector3(-0.4375f, -0.0625f, 0), Quaternion.Euler(0, 0, 150));
+                                Instantiate(arrow, transform.position + new Vector3(-0.4375f, -0.0625f, 0), Quaternion.Euler(0, 0, 120));
+                                GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().tsc;
+                            }
                         }
                     }
                     anim.SetBool("Nbow", false);

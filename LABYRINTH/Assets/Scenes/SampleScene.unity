@@ -2448,6 +2448,7 @@ MonoBehaviour:
   SP: {fileID: 9157868364669358520, guid: 7f8e836c6cdde4c6a90e862fbf694b87, type: 3}
   swingcost: 0
   bowexp: 1
+  tripleshot: 1
 --- !u!114 &1883679034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4336,10 +4337,17 @@ MonoBehaviour:
   toggles: 109
   be: 110
   beam: 99
+  lightning: 120
+  heal: 118
+  vort: 104
+  ts: 98
   Fireball: {fileID: 2114446073517247048, guid: f2494ce02f7b4411aa6bcfdfba03cd3d, type: 3}
   bigfireball: {fileID: 8398756938277699782, guid: 02bc2ba2879e04803b72ff80c194e427, type: 3}
   explosion: {fileID: 5639844345856039206, guid: 344c1354829ec42c0aa663e80f00c301, type: 3}
   beamp: {fileID: 6243133551874802568, guid: 99cd59eb93b81334ab4c49ea0982de30, type: 3}
+  bolt: {fileID: 672671523346777555, guid: f5cbde7da93ceec46a99ae51e5e6f3e9, type: 3}
+  healthanim: {fileID: 7422779359060167210, guid: 67991adeb206f634694430065e9d33b2, type: 3}
+  vortex: {fileID: 4992114812522292239, guid: 7c70bae7366467d43a8aa7cea53d4e25, type: 3}
   anim: {fileID: 0}
   animst: 
   sfbc: 10
@@ -4348,6 +4356,12 @@ MonoBehaviour:
   expc: 80
   bowc: 10
   beac: 50
+  boltc: 20
+  healc: 0.1
+  heala: 0
+  vortc: 50
+  tsc: 10
+  Player: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
