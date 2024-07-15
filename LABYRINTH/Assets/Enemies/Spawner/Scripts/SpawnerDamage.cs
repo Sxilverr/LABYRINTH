@@ -45,6 +45,7 @@ public class SpawnerDamage : MonoBehaviour
         damage = 0;
         if (health <= 0)
         {
+            GetComponent<ExperienceGiver>().dead = true;
             GetComponent<Animator>().SetBool("IsDead", true);
             int i = 0;
             while (i < ParticleAmount)
@@ -70,7 +71,7 @@ public class SpawnerDamage : MonoBehaviour
             }
             else
             {
-                damage += (1 / (1 - hitbox.sharedMaterial.friction) - 1) * GameObject.FindWithTag("Player").GetComponent<ManaManager>().manamax / 5 +80;
+                damage += (1 / (1 - hitbox.sharedMaterial.friction) - 1) * (GameObject.FindWithTag("Player").GetComponent<ManaManager>().manamax / 5 +80);
             }
         }
         if(hitbox.sharedMaterial != null && hitbox.isTrigger == false)

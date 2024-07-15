@@ -515,6 +515,7 @@ GameObject:
   - component: {fileID: 3930346651786754876}
   - component: {fileID: 7713627298943555883}
   - component: {fileID: 433508794256246484}
+  - component: {fileID: -1105220809278498315}
   m_Layer: 7
   m_Name: Lost Adventurer
   m_TagString: Enemy
@@ -734,3 +735,18 @@ MonoBehaviour:
   Health: {fileID: 8371491470530146571}
   OBS: 0
   maxhealth: 3000
+--- !u!114 &-1105220809278498315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8386841454349483599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ff75caabceca4e64990bc5de120a4a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  experience: 0
+  dead: 0
+  self: {fileID: 0}

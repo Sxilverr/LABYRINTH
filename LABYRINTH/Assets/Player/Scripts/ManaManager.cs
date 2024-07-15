@@ -24,6 +24,7 @@ public class ManaManager : MonoBehaviour
     public KeyCode heal;
     public KeyCode vort;
     public KeyCode ts;
+    public KeyCode dagge;
     public GameObject Fireball;
     public GameObject bigfireball;
     public GameObject explosion;
@@ -44,6 +45,7 @@ public class ManaManager : MonoBehaviour
     public float heala;
     public float vortc;
     public float tsc;
+    public float daggc;
     public Transform Player;
     // Start is called before the first frame update
     void Start()
@@ -98,13 +100,52 @@ public class ManaManager : MonoBehaviour
                 GetComponent<Movement>().tripleshot = true;
             }
         }
-        if (Input.GetKeyDown(heal) && mana >=  healc*manamax && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false && animst != "MagicCast")
+        if (Input.GetKeyDown(dagge))
         {
-            anim.SetBool("Magic", true);
-            heala = healc * GetComponent<PlayerDamage>().maxhealth;
-            GetComponent<PlayerDamage>().health += heala;
-            mana -= healc * manamax;
-            Instantiate(healthanim, transform.position, Quaternion.identity);
+            if (GetComponent<Movement>().daggers == true)
+            {
+                GetComponent<Movement>().daggers = false;
+            }
+            else
+            {
+                GetComponent<Movement>().daggers = true;
+            }
+        }
+        if (Input.GetKeyDown(heal) && mana >= healc * manamax && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false && animst != "MagicCast")
+        {
+            if (manamax >= 100)
+            {
+                anim.SetBool("Magic", true);
+                heala = healc * GetComponent<PlayerDamage>().maxhealth;
+                if (GetComponent<PlayerDamage>().maxhealth - GetComponent<PlayerDamage>().health >= heala)
+                {
+                    GetComponent<PlayerDamage>().health += heala;
+                }
+                else
+                {
+                    heala -= (GetComponent<PlayerDamage>().maxhealth - GetComponent<PlayerDamage>().health);
+                    GetComponent<PlayerDamage>().health = GetComponent<PlayerDamage>().maxhealth;
+                    GetComponent<PlayerDamage>().shield += heala;
+                }
+                mana -= healc * manamax;
+                Instantiate(healthanim, transform.position, Quaternion.identity);
+            } else if (mana >= healc*100)
+            {
+                anim.SetBool("Magic", true);
+                heala = healc * GetComponent<PlayerDamage>().maxhealth;
+                if (GetComponent<PlayerDamage>().maxhealth - GetComponent<PlayerDamage>().health >= heala)
+                {
+                    GetComponent<PlayerDamage>().health += heala;
+                }
+                else
+                {
+                    heala -= (GetComponent<PlayerDamage>().maxhealth - GetComponent<PlayerDamage>().health);
+                    GetComponent<PlayerDamage>().health = GetComponent<PlayerDamage>().maxhealth;
+                    GetComponent<PlayerDamage>().shield += heala;
+                }
+                mana -= healc * 100;
+                Instantiate(healthanim, transform.position, Quaternion.identity);
+            }
         }
         animst = anim.GetCurrentAnimatorClipInfo(0)[0].clip.name;
         if (manamax != 0 && doneyet == false)

@@ -196,6 +196,7 @@ GameObject:
   - component: {fileID: 5169147246702971985}
   - component: {fileID: 4814980149095315868}
   - component: {fileID: 7529257956068138146}
+  - component: {fileID: 5892459619812113668}
   m_Layer: 7
   m_Name: Dark Serpent
   m_TagString: Enemy
@@ -415,6 +416,21 @@ MonoBehaviour:
   Health: {fileID: 8525309407406035504}
   OBS: 0
   maxhealth: 3000
+--- !u!114 &5892459619812113668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4997099123288343584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ff75caabceca4e64990bc5de120a4a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  experience: 0
+  dead: 0
+  self: {fileID: 0}
 --- !u!1 &8525309407406035504
 GameObject:
   m_ObjectHideFlags: 0

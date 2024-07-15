@@ -55,8 +55,10 @@ public class Movement : MonoBehaviour
     public float vel;
     public LayerMask particles;
     public bool swordproj;
+    public bool daggers;
  
     public GameObject SP;
+    public GameObject Dagger;
     public float swingcost;
     public bool bowexp;
     public bool tripleshot;
@@ -201,7 +203,22 @@ public class Movement : MonoBehaviour
                         Instantiate(SP, transform.position, Quaternion.identity);
                     }
                 }
-                
+                if (GetComponent<ManaManager>().mana >= GetComponent<ManaManager>().daggc && daggers == true && animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false && animst != "MagicCast")
+                {
+                    GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().daggc;
+                    if (left == true)
+                    {
+                        GameObject narrow = Instantiate(Dagger, transform.position, Quaternion.identity);
+                        narrow.transform.Rotate(0, 0, 135);
+                        narrow.transform.localScale = new Vector3(1, -1, 1);
+                    }
+                    else
+                    {
+                        GameObject narrow = Instantiate(Dagger, transform.position, Quaternion.identity);
+                        narrow.transform.Rotate(0, 0, 45);
+                    }
+                }
+
             }
             if (Input.GetKeyDown(KeyCode.E) && (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow)))
             {
@@ -222,6 +239,21 @@ public class Movement : MonoBehaviour
                         narrow.transform.Rotate(0, 0, -45);
                     }
                 }
+                if (GetComponent<ManaManager>().mana >= GetComponent<ManaManager>().daggc && daggers == true && animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false && animst != "MagicCast")
+                {
+                    GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().daggc;
+                    if (left == true)
+                    {
+                        GameObject narrow = Instantiate(Dagger, transform.position, Quaternion.identity);
+                        narrow.transform.Rotate(0, 0, 180);
+                        narrow.transform.localScale = new Vector3(1, -1, 1);
+                    }
+                    else
+                    {
+                        Instantiate(Dagger, transform.position, Quaternion.identity);
+                    }
+                }
+
             }
             if (Input.GetKeyDown(KeyCode.E) && (Input.GetKey(KeyCode.UpArrow)))
             {
@@ -233,6 +265,12 @@ public class Movement : MonoBehaviour
                     GetComponent<ManaManager>().mana -= swingcost;
                     GameObject narrow = Instantiate(SP, transform.position, Quaternion.identity);
                     narrow.transform.Rotate(0, 0, 45);
+                }
+                if (GetComponent<ManaManager>().mana >= GetComponent<ManaManager>().daggc && daggers == true && animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false && animst != "MagicCast")
+                {
+                    GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().daggc;
+                    GameObject narrow = Instantiate(Dagger, transform.position, Quaternion.identity);
+                    narrow.transform.Rotate(0, 0, 90);
                 }
             }
             if (Input.GetKeyDown(KeyCode.E) && (Input.GetKey(KeyCode.DownArrow)))
@@ -258,6 +296,23 @@ public class Movement : MonoBehaviour
                         narrow.transform.Rotate(0, 0, -135);
                     }
                 }
+                if (GetComponent<ManaManager>().mana >= GetComponent<ManaManager>().daggc && daggers == true && animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false && animst != "MagicCast")
+                {
+                    if (jumpenabled() == false)
+                    {
+                        GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().daggc;
+                        GameObject narrow = Instantiate(Dagger, transform.position, Quaternion.identity);
+                        narrow.transform.Rotate(0, 0, -90);
+                        
+                    } else if (GetComponent<ManaManager>().mana >= 2* GetComponent<ManaManager>().daggc)
+                    {
+                        GetComponent<ManaManager>().mana -= 2*GetComponent<ManaManager>().daggc;
+                        Instantiate(Dagger, transform.position, Quaternion.identity);
+                        GameObject narrow = Instantiate(Dagger, transform.position, Quaternion.identity);
+                        narrow.transform.Rotate(0, 0, 180);
+                    }
+                }
+
             }
             if (Input.GetKeyDown(KeyCode.Q) && (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow)))
             {

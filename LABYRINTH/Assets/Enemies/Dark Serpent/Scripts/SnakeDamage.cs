@@ -42,6 +42,7 @@ public class SnakeDamage : MonoBehaviour
         damage = 0;
         if (health <= 0)
         {
+            GetComponent<ExperienceGiver>().dead = true;
             GetComponent<Animator>().SetBool("IsDead", true);
         }
     }

@@ -20,12 +20,15 @@ public class PlayerDamage : MonoBehaviour
     public Image Healthbar;
     public TMP_Text Healthtext;
     public float initwidth;
+    public Sprite heal;
+    public Sprite over;
+    public float shieldcap;
     // Start is called before the first frame update
     void Start()
     {
         maxhealth = gameObject.GetComponent<StatManager>().healthC;
         armor = gameObject.GetComponent<StatManager>().armor;
-        shield = gameObject.GetComponent<StatManager>().shield;
+        shieldcap = gameObject.GetComponent<StatManager>().shield;
         health = maxhealth;
         hrtimer = 0;
         initwidth = Healthbar.rectTransform.rect.width;
@@ -33,10 +36,18 @@ public class PlayerDamage : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (hrtimer == 0)
+        if (hrtimer <= 0)
         {
-            hrtimer = 100;
-            health += healthregen;
+            if(health < maxhealth)
+            {
+                hrtimer = 100;
+                health += healthregen;
+            }
+            else if(shield < shieldcap)
+            {
+                hrtimer = 100;
+                shield += healthregen;
+            }
         }
         if (healthregen != 0)
         {
@@ -50,13 +61,26 @@ public class PlayerDamage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (shield > shieldcap)
+        {
+            shield = shieldcap;
+        }
         Healthbar.rectTransform.localScale = new Vector2(health/maxhealth, 1);
         Healthbar.rectTransform.position = new Vector2(106 - 0f*(initwidth*(1 - health / maxhealth)), 22);
-        Healthtext.text = (Mathf.Round(health*10)/10) + " / " + Mathf.Round(maxhealth*10)/10;
+        Healthtext.text = (Mathf.Round(health*10 + shield * 10)/10) + " / " + Mathf.Round(maxhealth*10)/10;
+        if (shield == 0)
+        {
+            Healthtext.color = new Color(255/255, 119f/255, 119f/255, 255/255);
+            Healthbar.sprite = heal;
+        } else
+        {
+            Healthtext.color = new Color(0, 255/255, 228f/255, 255/255);
+            Healthbar.sprite = over;
+        }
         if (check == false && maxhealth != 0) {
             maxhealth = gameObject.GetComponent<StatManager>().healthC;
             armor = gameObject.GetComponent<StatManager>().armor;
-            shield = gameObject.GetComponent<StatManager>().shield;
+            shieldcap = gameObject.GetComponent<StatManager>().shield;
             health = maxhealth;
             check = true;
         }
@@ -68,7 +92,7 @@ public class PlayerDamage : MonoBehaviour
         maxhealth = gameObject.GetComponent<StatManager>().healthC;
         lightc = gameObject.GetComponent<StatManager>().lightC;
         armor = gameObject.GetComponent<StatManager>().armor;
-        shield = gameObject.GetComponent<StatManager>().shield;
+        shieldcap = gameObject.GetComponent<StatManager>().shield;
         healthregen = gameObject.GetComponent<StatManager>().healthR;
         BV.transform.localScale = new Vector3(0.3f+Mathf.Pow(10*lightc, 0.33333333333f)*health/maxhealth/10f*0.7f, 0.3f + Mathf.Pow(10 * lightc, 0.33333333333f) * health / maxhealth / 10f * 0.7f, 0.3f + Mathf.Pow(10 * lightc, 0.33333333333f) * health / maxhealth / 10f * 0.7f);
         damage /= (100+armor);
@@ -81,12 +105,12 @@ public class PlayerDamage : MonoBehaviour
         {
             if(damage < shield)
             {
-                GetComponent<StatManager>().shieldalloc -= 10*damage;
+                shield -= damage;
                 damage = 0;
             } else
             {
                 damage -= shield;
-                GetComponent<StatManager>().shieldalloc = 0;
+                shield = 0;
                 health -= damage;
                 damage = 0;
             }
