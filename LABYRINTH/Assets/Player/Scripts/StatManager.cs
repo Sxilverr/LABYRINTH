@@ -66,6 +66,7 @@ public class StatManager : MonoBehaviour
     public TMP_Text LVLup;
     public float leveltimer;
     public float prevlevelchecker;
+    public float res;
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +76,7 @@ public class StatManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        res = Screen.width;
         lightC = (25+level+Mathf.Floor(0.0125f*level*level))/25*(1 + lightCm) * (100 + lightCa);
         manaC = Mathf.Pow((1 + manaCm), (1 + manaCe))*(lightC+manaCa);
         manaR = (1 + manaRm) * manaC / 100f;
@@ -100,13 +102,14 @@ public class StatManager : MonoBehaviour
             nlvpg = nlvlamt - plvlamt - xpleft;
             pctl = nlvpg / (nlvlamt - plvlamt);
             XPtext.text = nlvpg.ToString() + " / " + (nlvlamt - plvlamt).ToString();
-            XPBAR.rectTransform.localScale = new Vector2(pctl, 1);
+            XPBAR.rectTransform.localScale = new Vector2(pctl*res/1920, res/1920);
+            
             LVtext.text = "LVL " + level.ToString();
         } else
         {
             level = 100;
             XPtext.text = "9950 / 9950";
-            XPBAR.rectTransform.localScale = new Vector2(1, 1);
+            XPBAR.rectTransform.localScale = new Vector2(res/1920, res/1920);
             LVtext.text = "LVL 100";
         }
     }

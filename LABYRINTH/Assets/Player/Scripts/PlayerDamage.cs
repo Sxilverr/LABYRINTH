@@ -18,11 +18,18 @@ public class PlayerDamage : MonoBehaviour
     public GameObject BV;
     public GameObject Cover;
     public Image Healthbar;
+    public Image Healthunder;
+    public Image ManaOver;
+    public Image ManaUnder;
+    public Image XpOver;
+    public Image XpUnder;
     public TMP_Text Healthtext;
     public float initwidth;
     public Sprite heal;
     public Sprite over;
     public float shieldcap;
+    public float res;
+    public Image XPtext;
     // Start is called before the first frame update
     void Start()
     {
@@ -61,13 +68,28 @@ public class PlayerDamage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        res = Screen.width;
         if (shield > shieldcap)
         {
             shield = shieldcap;
         }
-        Healthbar.rectTransform.localScale = new Vector2(health/maxhealth, 1);
-        Healthbar.rectTransform.position = new Vector2(106 - 0f*(initwidth*(1 - health / maxhealth)), 22);
+        if (maxhealth != 0)
+        {
+            Healthbar.rectTransform.localScale = new Vector2(res / 1920*health / maxhealth, res / 1920);
+            Healthbar.rectTransform.position = new Vector2(212*res/1920, 44*res/1920);
+        }
+        Healthunder.rectTransform.localScale = new Vector2(res / 1920, res / 1920);
+        Healthunder.rectTransform.position = new Vector2(212 * res / 1920, 44 * res / 1920);
+        Healthtext.rectTransform.localScale = new Vector2(res / 1920, res / 1920);
+        Healthtext.rectTransform.position = new Vector2(212 * res / 1920, 44 * res / 1920);
+        ManaUnder.rectTransform.localScale = new Vector2(res / 1920, res / 1920);
+        ManaUnder.rectTransform.position = new Vector2(res-(212 * res / 1920), 44 * res / 1920);
+        XpOver.rectTransform.position = new Vector2(212 * res / 1920, Screen.height-(44 * res / 1920));
+        XpUnder.rectTransform.localScale = new Vector2(res / 1920, res / 1920);
+        XPtext.rectTransform.localScale = new Vector2(res / 1920, res / 1920);
+        XpUnder.rectTransform.position = new Vector2(212 * res / 1920, Screen.height-(44 * res / 1920));
         Healthtext.text = (Mathf.Round(health*10 + shield * 10)/10) + " / " + Mathf.Round(maxhealth*10)/10;
+        XPtext.rectTransform.position = new Vector2(212 * res / 1920, Screen.height - (44 * res / 1920));
         if (shield == 0)
         {
             Healthtext.color = new Color(255/255, 119f/255, 119f/255, 255/255);
