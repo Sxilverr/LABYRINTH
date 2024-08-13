@@ -66,7 +66,8 @@ public class Movement : MonoBehaviour
     public bool paused;
     public GameObject UIholder;
     public float res;
-
+    public bool fly;
+    public float flyspeed;
     // Start is called before the first frame update
     void Start()
     {
@@ -80,7 +81,7 @@ public class Movement : MonoBehaviour
     void FixedUpdate()
     {
         dtg = GetComponent<Collider2D>().bounds.extents.y;
-        if (animst == "DownAir" || animst == "Nair" || animst == "Fair" || animst == "UpAir" || (animst == "MagicCast" && jumpenabled() == false))
+        if (animst == "DownAir" || animst == "Nair" || animst == "Fair" || animst == "UpAir" || (animst == "MagicCast" && jumpenabled() == false) && fly == false)
         {
             if (Input.GetKey(KeyCode.D))
             {
@@ -95,7 +96,7 @@ public class Movement : MonoBehaviour
                 rb.AddForce(new Vector3(0, -ff, 0));
             }
         }
-        if (animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false && animst != "MagicCast")
+        if (fly == false && animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false && animst != "MagicCast")
         {
             if (Input.GetKey(KeyCode.D))
             {
@@ -167,6 +168,57 @@ public class Movement : MonoBehaviour
     }
     void Update()
     {
+        if(fly == true)
+        {
+            if(GetComponent<ManaManager>().mana <= 0)
+            {
+                fly = false;
+            }
+            GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().flyc * Time.deltaTime;
+            rb.gravityScale = 0;
+            if (Input.GetKey(KeyCode.W))
+            {
+                rb.velocity = new Vector3(0, GetComponent<StatManager>().speed*flyspeed/100, 0);
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                rb.velocity = new Vector3(0, -GetComponent<StatManager>().speed * flyspeed / 100, 0);
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                rb.velocity = new Vector3(1 * GetComponent<StatManager>().speed * flyspeed / 100, 0, 0);
+                if(animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false && animst != "MagicCast")
+                    left = false;
+
+            }
+            else if (Input.GetKey(KeyCode.A))
+            {
+                rb.velocity = new Vector3(-GetComponent<StatManager>().speed * flyspeed / 100, 0, 0);
+                if(animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false && animst != "MagicCast")
+                    left = true;
+            }
+            else
+            {
+                rb.velocity = Vector3.zero;
+            }
+
+            if (Input.GetKey(KeyCode.LeftArrow) && animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false && animst != "MagicCast")
+            {
+                left = true;
+            }
+            if (Input.GetKey(KeyCode.RightArrow) && animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false && animst != "MagicCast")
+            {
+                left = false;
+            }
+            if(flyup() == true)
+            {
+                transform.position += new Vector3(0, Time.deltaTime * 2, 0);
+            }
+        }
+        else
+        {
+            rb.gravityScale = 3;
+        }
         res = Screen.width;
         UIholder.transform.localScale = new Vector3(res/1920, res/1920, 1);
         UIholder.transform.localScale = new Vector3(res/1920, res/1920, res/1920);
@@ -457,11 +509,11 @@ public class Movement : MonoBehaviour
                 GetComponent<SpriteRenderer>().flipX = false;
             }
             ff = jump / 2;
-            if (jumpenabled() && Input.GetKeyDown(KeyCode.Space) && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && animst != "MagicCast")
+            if (jumpenabled() && Input.GetKeyDown(KeyCode.Space) && fly == false && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && animst != "MagicCast")
             {
                 rb.AddForce(new Vector3(0, 4 * jump, 0));
             }
-            if (!jumpenabled() && Input.GetKeyDown(KeyCode.Space) && doublejump == true && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && animst != "MagicCast")
+            if (!jumpenabled() && Input.GetKeyDown(KeyCode.Space) && doublejump == true && fly == false && animst != "FwdSwing" && animst != "Jab" && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && animst != "MagicCast")
             {
                 rb.velocity = (new Vector3(rb.velocity.x, jump / 10f, 0));
                 doublejump = false;
@@ -827,6 +879,16 @@ public class Movement : MonoBehaviour
             return Physics2D.Raycast(new Vector3(transform.position.x - 0.3125f, transform.position.y, transform.position.z), -Vector3.up, dtg + 0.05f, ~particles);
         if (Physics2D.Raycast(new Vector3(transform.position.x + 0.3125f, transform.position.y, transform.position.z), -Vector3.up, dtg + 0.05f, ~particles))
             return Physics2D.Raycast(new Vector3(transform.position.x + 0.3125f, transform.position.y, transform.position.z), -Vector3.up, dtg + 0.05f, ~particles);
+        return false;
+    }
+    public bool flyup()
+    {
+        if (Physics2D.Raycast(transform.position, -Vector3.up, dtg + 0.5f, ~particles) == true)
+            return Physics2D.Raycast(transform.position, -Vector3.up, dtg + 0.5f, ~particles);
+        if (Physics2D.Raycast(new Vector3(transform.position.x - 0.3125f, transform.position.y, transform.position.z), -Vector3.up, dtg + 0.5f, ~particles))
+            return Physics2D.Raycast(new Vector3(transform.position.x - 0.3125f, transform.position.y, transform.position.z), -Vector3.up, dtg + 0.5f, ~particles);
+        if (Physics2D.Raycast(new Vector3(transform.position.x + 0.3125f, transform.position.y, transform.position.z), -Vector3.up, dtg + 0.5f, ~particles))
+            return Physics2D.Raycast(new Vector3(transform.position.x + 0.3125f, transform.position.y, transform.position.z), -Vector3.up, dtg + 0.5f, ~particles);
         return false;
     }
 }

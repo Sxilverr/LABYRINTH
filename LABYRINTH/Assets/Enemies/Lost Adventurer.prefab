@@ -516,6 +516,7 @@ GameObject:
   - component: {fileID: 7713627298943555883}
   - component: {fileID: 433508794256246484}
   - component: {fileID: -1105220809278498315}
+  - component: {fileID: 8462472789444487675}
   m_Layer: 7
   m_Name: Lost Adventurer
   m_TagString: Enemy
@@ -750,3 +751,16 @@ MonoBehaviour:
   experience: 0
   dead: 0
   self: {fileID: 0}
+--- !u!114 &8462472789444487675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8386841454349483599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2f71d252a9f79c4c85fb170616bf897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freeze: 0

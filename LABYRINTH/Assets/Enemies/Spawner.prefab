@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 852336742574971738}
   - component: {fileID: 8610934366820362330}
   - component: {fileID: 5660752642337832779}
+  - component: {fileID: -4424121660408100141}
   m_Layer: 2
   m_Name: Spawner
   m_TagString: Enemy
@@ -384,3 +385,16 @@ MonoBehaviour:
   experience: 0
   dead: 0
   self: {fileID: 0}
+--- !u!114 &-4424121660408100141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4972955085007705760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2f71d252a9f79c4c85fb170616bf897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freeze: 0

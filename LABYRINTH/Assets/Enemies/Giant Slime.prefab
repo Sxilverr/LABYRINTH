@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3267164530414407699}
   - component: {fileID: 8990465194414873100}
   - component: {fileID: 681430547306218727}
+  - component: {fileID: -8057706776774617402}
   m_Layer: 7
   m_Name: Giant Slime
   m_TagString: Enemy
@@ -298,6 +299,19 @@ MonoBehaviour:
   experience: 0
   dead: 0
   self: {fileID: 0}
+--- !u!114 &-8057706776774617402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6595286266011346545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2f71d252a9f79c4c85fb170616bf897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freeze: 0
 --- !u!1 &7042039818996487691
 GameObject:
   m_ObjectHideFlags: 0

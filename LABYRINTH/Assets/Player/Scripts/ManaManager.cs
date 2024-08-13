@@ -51,6 +51,22 @@ public class ManaManager : MonoBehaviour
     public GameObject Ab1;
     public GameObject Ab2;
     public GameObject Ab3;
+    public KeyCode fly;
+    public float flyc;
+    public KeyCode Damaura;
+    public KeyCode Heaura;
+    public KeyCode fraura;
+    public float dac;
+    public float hac;
+    public float fac;
+    public bool daura;
+    public bool heaura;
+    public bool fraur;
+    public float heamt;
+    public float damut;
+    public float framt;
+    public float frite;
+    public GameObject lighte;
     // Start is called before the first frame update
     void Start()
     {
@@ -77,6 +93,58 @@ public class ManaManager : MonoBehaviour
         if (mana < 0)
         {
             mana = 0;
+        }
+        if (daura == true && mana >= dac * 0.02f)
+        {
+            lighte.GetComponent<SpriteRenderer>().color = Color.red;
+            mana -= dac * 0.02f;
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in enemies)
+            {
+                if (Vector3.Distance(transform.position, enemy.transform.position) < 5)
+                {
+                    if ((enemy.GetComponent<SlimeDamage>() != null))
+                        enemy.GetComponent<SlimeDamage>().damage += damut * ((manamax / 5 + 80)) / 2;
+                    if ((enemy.GetComponent<SnakeDamage>() != null))
+                        enemy.GetComponent<SnakeDamage>().damage += damut * ((manamax / 5 + 80)) / 2;
+                    if ((enemy.GetComponent<LADamage>() != null))
+                        enemy.GetComponent<LADamage>().damage += damut * ((manamax / 5 + 80)) / 2;
+                    if ((enemy.GetComponent<SpawnerDamage>() != null))
+                        enemy.GetComponent<SpawnerDamage>().damage += damut * ((manamax / 5 + 80)) / 2;
+                }
+            }
+        } else if (heaura == true && mana >= hac * 0.02f)
+        {
+            lighte.GetComponent<SpriteRenderer>().color = new Color(1, 0.5f, 0.5f);
+            if (GetComponent<PlayerDamage>().health < GetComponent<PlayerDamage>().maxhealth) {
+                mana -= hac * 0.02f;
+                GetComponent<PlayerDamage>().health += heamt * 0.0002f * GetComponent<PlayerDamage>().maxhealth;
+            }
+        } else if (fraur == true && mana >= fac) {
+            if(frite > 0)
+            {
+                frite -= 1;
+            }
+            if(frite == 0)
+            {
+                mana -= fac;
+                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                foreach (GameObject enemy in enemies)
+                {
+                    if (Vector3.Distance(transform.position, enemy.transform.position) < 5)
+                    {
+                        enemy.GetComponent<FreezeManager>().freezeTime += framt;
+                    }
+                }
+                frite = 100;
+            }
+            lighte.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.8f, 1f);
+        } else
+        {
+            lighte.GetComponent<SpriteRenderer>().color = Color.white;
+            daura = false;
+            heaura = false;
+            fraur = false;
         }
     }
 
@@ -195,6 +263,50 @@ public class ManaManager : MonoBehaviour
         res = Screen.width;
         if (Time.timeScale != 0)
         {
+            if (Input.GetKeyDown(Damaura))
+            {
+                if (daura == true)
+                {
+                    daura = false;
+                }
+                else if (mana > flyc)
+                {
+                    daura = true;
+                }
+            }
+            if (Input.GetKeyDown(Heaura))
+            {
+                if (heaura == true)
+                {
+                    heaura = false;
+                }
+                else if (mana > flyc)
+                {
+                    heaura = true;
+                }
+            }
+            if (Input.GetKeyDown(fraura))
+            {
+                if (fraur == true)
+                {
+                    fraur = false;
+                }
+                else if (mana > flyc)
+                {
+                    fraur = true;
+                }
+            }
+            if (Input.GetKeyDown(fly))
+            {
+                if (GetComponent<Movement>().fly == true)
+                {
+                    GetComponent<Movement>().fly = false;
+                }
+                else if(mana > flyc)
+                {
+                    GetComponent<Movement>().fly = true;
+                }
+            }
             if (Input.GetKeyDown(be))
             {
                 if (GetComponent<Movement>().bowexp == true)
