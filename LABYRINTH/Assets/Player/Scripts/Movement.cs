@@ -279,6 +279,7 @@ public class Movement : MonoBehaviour
                             Instantiate(SP, transform.position, Quaternion.identity);
                         }
                     }
+
                     if (GetComponent<ManaManager>().mana >= GetComponent<ManaManager>().daggc && daggers == true && animst != "FwdSwing" && animst != "Jab" && cd <= 0 && animst != "UpJab" && animst != "DownSlash" && animst != "DownAir" && animst != "Nair" && animst != "Fair" && animst != "UpAir" && animst != "BowDraw" && animst != "BowFull" && animst != "NBow" && animst != "NBowFull" && anim.GetBool("Nbow") == false && anim.GetBool("BowF") == false && animst != "MagicCast")
                     {
                         GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().daggc;
@@ -434,7 +435,7 @@ public class Movement : MonoBehaviour
                             if (left == false)
                             {
 
-                                Instantiate(arrow, transform.position + new Vector3(0.5f, -0.0625f, 0), Quaternion.identity);
+                                GameObject arrr = Instantiate(arrow, transform.position + new Vector3(0.5f, -0.0625f, 0), Quaternion.identity);
                                 if (tripleshot == true && GetComponent<ManaManager>().mana >= GetComponent<ManaManager>().tsc)
                                 {
                                     Instantiate(arrow, transform.position + new Vector3(0.5f, -0.0625f, 0), Quaternion.Euler(0, 0, 15));
@@ -442,15 +443,48 @@ public class Movement : MonoBehaviour
 
                                     GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().tsc;
                                 }
+                                if (GetComponent<ManaManager>().aim == true)
+                                {
+                                    arrr.GetComponent<arrowvel>().home = true;
+                                    GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().aimc;
+                                }
+
+                                if (GetComponent<ManaManager>().tele == true)
+                                {
+                                    arrr.GetComponent<arrowvel>().tp = true;
+                                    GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().tpc;
+                                }
+                                if (GetComponent<ManaManager>().ghosta == true)
+                                {
+                                    arrr.GetComponent<arrowvel>().ghost = true;
+                                    GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().ghoc;
+                                }
                             }
                             else
                             {
-                                Instantiate(arrow, transform.position + new Vector3(-0.5f, -0.25f, 0), Quaternion.Euler(0, 0, 180));
+                                GameObject arrr = Instantiate(arrow, transform.position + new Vector3(-0.5f, -0.25f, 0), Quaternion.Euler(0, 0, 180));
                                 if (tripleshot == true && GetComponent<ManaManager>().mana >= GetComponent<ManaManager>().tsc)
                                 {
                                     Instantiate(arrow, transform.position + new Vector3(-0.5f, -0.25f, 0), Quaternion.Euler(0, 0, 195));
                                     Instantiate(arrow, transform.position + new Vector3(-0.5f, -0.25f, 0), Quaternion.Euler(0, 0, 165));
                                     GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().tsc;
+
+                                }
+                                if (GetComponent<ManaManager>().aim == true)
+                                {
+                                    arrr.GetComponent<arrowvel>().home = true;
+                                    GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().aimc;
+                                }
+
+                                if (GetComponent<ManaManager>().tele == true)
+                                {
+                                    arrr.GetComponent<arrowvel>().tp = true;
+                                    GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().tpc;
+                                }
+                                if (GetComponent<ManaManager>().ghosta == true)
+                                {
+                                    arrr.GetComponent<arrowvel>().ghost = true;
+                                    GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().ghoc;
                                 }
                             }
                         }
@@ -462,22 +496,54 @@ public class Movement : MonoBehaviour
                         {
                             if (left == false)
                             {
-                                Instantiate(arrow, transform.position + new Vector3(0.4375f, .1875f, 0), Quaternion.Euler(0, 0, 45));
+                                GameObject arrr = Instantiate(arrow, transform.position + new Vector3(0.4375f, .1875f, 0), Quaternion.Euler(0, 0, 45));
                                 if (tripleshot == true && GetComponent<ManaManager>().mana >= GetComponent<ManaManager>().tsc)
                                 {
                                     Instantiate(arrow, transform.position + new Vector3(0.4375f, .1875f, 0), Quaternion.Euler(0, 0, 60));
                                     Instantiate(arrow, transform.position + new Vector3(0.4375f, .1875f, 0), Quaternion.Euler(0, 0, 30));
                                     GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().tsc;
                                 }
+                                if (GetComponent<ManaManager>().aim == true)
+                                {
+                                    arrr.GetComponent<arrowvel>().home = true;
+                                    GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().aimc;
+                                }
+
+                                if (GetComponent<ManaManager>().tele == true)
+                                {
+                                    arrr.GetComponent<arrowvel>().tp = true;
+                                    GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().tpc;
+                                }
+                                if (GetComponent<ManaManager>().ghosta == true)
+                                {
+                                    arrr.GetComponent<arrowvel>().ghost = true;
+                                    GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().ghoc;
+                                }
                             }
                             else
                             {
-                                Instantiate(arrow, transform.position + new Vector3(-0.4375f, -0.0625f, 0), Quaternion.Euler(0, 0, 135));
+                                GameObject arrr = Instantiate(arrow, transform.position + new Vector3(-0.4375f, -0.0625f, 0), Quaternion.Euler(0, 0, 135));
                                 if (tripleshot == true && GetComponent<ManaManager>().mana >= GetComponent<ManaManager>().tsc)
                                 {
                                     Instantiate(arrow, transform.position + new Vector3(-0.4375f, -0.0625f, 0), Quaternion.Euler(0, 0, 150));
                                     Instantiate(arrow, transform.position + new Vector3(-0.4375f, -0.0625f, 0), Quaternion.Euler(0, 0, 120));
                                     GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().tsc;
+                                }
+                                if (GetComponent<ManaManager>().aim == true)
+                                {
+                                    arrr.GetComponent<arrowvel>().home = true;
+                                    GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().aimc;
+                                }
+
+                                if (GetComponent<ManaManager>().tele == true)
+                                {
+                                    arrr.GetComponent<arrowvel>().tp = true;
+                                    GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().tpc;
+                                }
+                                if (GetComponent<ManaManager>().ghosta == true)
+                                {
+                                    arrr.GetComponent<arrowvel>().ghost = true;
+                                    GetComponent<ManaManager>().mana -= GetComponent<ManaManager>().ghoc;
                                 }
                             }
                         }

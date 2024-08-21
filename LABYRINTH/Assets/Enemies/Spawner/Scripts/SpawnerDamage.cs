@@ -63,7 +63,7 @@ public class SpawnerDamage : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D hitbox)
     {
-        if (hitbox.sharedMaterial != null && hitbox.isTrigger == true && hitbox.gameObject.tag != "SwordMagicProj")
+        if (hitbox.sharedMaterial.friction != 0 && hitbox.isTrigger == true && hitbox.gameObject.tag != "SwordMagicProj")
         {
             if (hitbox.gameObject.tag != "MagicProj")
             {
@@ -74,14 +74,27 @@ public class SpawnerDamage : MonoBehaviour
                 damage += (1 / (1 - hitbox.sharedMaterial.friction) - 1) * (GameObject.FindWithTag("Player").GetComponent<ManaManager>().manamax / 5 +80);
             }
         }
-        if(hitbox.sharedMaterial != null && hitbox.isTrigger == false)
+        if(hitbox.sharedMaterial.friction == 0 && hitbox.isTrigger == false)
         {
             hitbox.gameObject.GetComponent<PlayerDamage>().damage = attack;
+        }
+        if (hitbox.gameObject.GetComponent<ManaManager>().lss == true && hitbox.sharedMaterial.friction != 0)
+        {
+            hitbox.gameObject.GetComponent<PlayerDamage>().health += hitbox.gameObject.GetComponent<ManaManager>().lsamt;
+        }
+        if (hitbox.gameObject.GetComponent<ManaManager>().manass == true && hitbox.sharedMaterial.friction != 0)
+        {
+            hitbox.gameObject.GetComponent<ManaManager>().mana += hitbox.gameObject.GetComponent<ManaManager>().mansamt;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.sharedMaterial != null)
+        if (collision.gameObject.GetComponent<ManaManager>().freeze == true && collision.sharedMaterial.friction != 0)
+        {
+            GetComponent<FreezeManager>().freezeTime = 25;
+            collision.GetComponent<ManaManager>().mana -= collision.GetComponent<ManaManager>().frc;
+        }
+        if (collision.sharedMaterial.friction != 0)
         {
             collct += 1;
         }

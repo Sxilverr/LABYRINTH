@@ -51,22 +51,48 @@ public class ManaManager : MonoBehaviour
     public GameObject Ab1;
     public GameObject Ab2;
     public GameObject Ab3;
+    public GameObject Pa;
+    public GameObject swa;
+    public GameObject boa;
     public KeyCode fly;
     public float flyc;
     public KeyCode Damaura;
     public KeyCode Heaura;
     public KeyCode fraura;
+    public KeyCode Laura;
     public float dac;
     public float hac;
     public float fac;
+    public float lac;
     public bool daura;
     public bool heaura;
     public bool fraur;
+    public bool lsaura;
     public float heamt;
     public float damut;
     public float framt;
     public float frite;
     public GameObject lighte;
+    public KeyCode frs;
+    public bool freeze;
+    public float frc;
+    public KeyCode lssw;
+    public KeyCode manas;
+    public bool lss;
+    public bool manass;
+    public float lsamt;
+    public float mansamt;
+    public KeyCode Home;
+    public bool aim;
+    public KeyCode tp;
+    public bool tele;
+    public KeyCode ghostt;
+    public bool ghosta;
+    public float aimc;
+    public float tpc;
+    public float ghoc;
+    public TMP_Text abilitystatus;
+    public string abistat;
     // Start is called before the first frame update
     void Start()
     {
@@ -86,7 +112,7 @@ public class ManaManager : MonoBehaviour
         {
             mana += regen / 25;
         }
-        if(mana > manamax)
+        if (mana > manamax)
         {
             mana = manamax;
         }
@@ -121,11 +147,11 @@ public class ManaManager : MonoBehaviour
                 GetComponent<PlayerDamage>().health += heamt * 0.0002f * GetComponent<PlayerDamage>().maxhealth;
             }
         } else if (fraur == true && mana >= fac) {
-            if(frite > 0)
+            if (frite > 0)
             {
                 frite -= 1;
             }
-            if(frite == 0)
+            if (frite == 0)
             {
                 mana -= fac;
                 GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -139,17 +165,72 @@ public class ManaManager : MonoBehaviour
                 frite = 100;
             }
             lighte.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.8f, 1f);
+        } else if (lsaura == true && mana >= (dac + hac) * 0.02f)
+        {
+            lighte.GetComponent<SpriteRenderer>().color = Color.red;
+            mana -= dac * 0.02f;
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in enemies)
+            {
+                if (Vector3.Distance(transform.position, enemy.transform.position) < 5)
+                {
+                    if ((enemy.GetComponent<SlimeDamage>() != null))
+                        enemy.GetComponent<SlimeDamage>().damage += damut * ((manamax / 5 + 80)) / 2;
+                    if ((enemy.GetComponent<SnakeDamage>() != null))
+                        enemy.GetComponent<SnakeDamage>().damage += damut * ((manamax / 5 + 80)) / 2;
+                    if ((enemy.GetComponent<LADamage>() != null))
+                        enemy.GetComponent<LADamage>().damage += damut * ((manamax / 5 + 80)) / 2;
+                    if ((enemy.GetComponent<SpawnerDamage>() != null))
+                        enemy.GetComponent<SpawnerDamage>().damage += damut * ((manamax / 5 + 80)) / 2;
+                }
+            }
+            if (GetComponent<PlayerDamage>().health < GetComponent<PlayerDamage>().maxhealth)
+            {
+                mana -= hac * 0.02f;
+                GetComponent<PlayerDamage>().health += heamt * 0.0002f * GetComponent<PlayerDamage>().maxhealth;
+            }
+
         } else
         {
             lighte.GetComponent<SpriteRenderer>().color = Color.white;
             daura = false;
             heaura = false;
             fraur = false;
+            lsaura = false;
         }
     }
 
     void Update()
     {
+        abistat = "Passive - ";
+        if (daura == true || fraur == true || heaura == true || GetComponent<Movement>().fly == true || lsaura == true)
+        {
+            abistat = abistat + "Enabled\n";
+        } else
+        {
+            abistat = abistat + "Disabled\n";
+        }
+        abistat = abistat + "Sword - ";
+        if (GetComponent<Movement>().swordproj == true || manass == true || freeze == true || GetComponent<Movement>().daggers == true || lss == true)
+        {
+            abistat = abistat + "Enabled\n";
+        }
+        else
+        {
+            abistat = abistat + "Disabled\n";
+        }
+        abistat = abistat + "Bow - ";
+        if (GetComponent<Movement>().bowexp == true || ghosta == true || tele == true || GetComponent<Movement>().tripleshot == true || aim == true)
+        {
+            abistat = abistat + "Enabled\n";
+        }
+        else
+        {
+            abistat = abistat + "Disabled\n";
+        }
+        abilitystatus.text = abistat;
+
+
         if (Ab1.GetComponent<AbilitySlot>().id_self == 1)
         {
             fireball = KeyCode.F;
@@ -259,7 +340,157 @@ public class ManaManager : MonoBehaviour
         {
             vort = KeyCode.None;
         }
+        if(Pa.GetComponent<AbilitySlot>().id_self == 1)
+        {
+            Damaura = KeyCode.V;
+        } else
+        {
+            Damaura = KeyCode.None;
+            daura = false;
+        }
+        if (Pa.GetComponent<AbilitySlot>().id_self == 2)
+        {
+            Heaura = KeyCode.V;
+        }
+        else
+        {
+            Heaura = KeyCode.None;
+            heaura = false;
+        }
+        if (Pa.GetComponent<AbilitySlot>().id_self == 3)
+        {
+            fraura = KeyCode.V;
+        }
+        else
+        {
+            fraura = KeyCode.None;
+            fraur = false;
+        }
+        if (Pa.GetComponent<AbilitySlot>().id_self == 4)
+        {
+            Laura = KeyCode.V;
+        }
+        else
+        {
+            Laura = KeyCode.None;
+            lsaura = false;
+        }
+        if (Pa.GetComponent<AbilitySlot>().id_self == 5)
+        {
+            fly = KeyCode.V;
+        }
+        else
+        {
+            fly = KeyCode.None;
+            GetComponent<Movement>().fly = false;
+        }
+        if (swa.GetComponent<AbilitySlot>().id_self == 1)
+        {
+            dagge = KeyCode.G;
+        }
+        else
+        {
+            dagge = KeyCode.None;
+            GetComponent<Movement>().daggers = false;
+        }
+        if (swa.GetComponent<AbilitySlot>().id_self == 2)
+        {
+            toggles = KeyCode.G;
+        }
+        else
+        {
+            toggles = KeyCode.None;
+            GetComponent<Movement>().swordproj = false;
+        }
+        if (swa.GetComponent<AbilitySlot>().id_self == 3)
+        {
+            frs = KeyCode.G;
+            
+        }
+        else
+        {
+            frs = KeyCode.None;
+            freeze = false;
+        }
+        if (swa.GetComponent<AbilitySlot>().id_self == 4)
+        {
+            manas = KeyCode.G;
+            
+        }
+        else
+        {
+            manas = KeyCode.None;
+            manass = false;
+        }
+        if (swa.GetComponent<AbilitySlot>().id_self == 5)
+        {
+            lssw = KeyCode.G;
+            
+        }
+        else
+        {
+            lssw = KeyCode.None;
+            lss = false;
+        }
+        if (boa.GetComponent<AbilitySlot>().id_self == 1)
+        {
+            ghostt = KeyCode.B;
+        }
+        else
+        {
+            ghostt = KeyCode.None;
+            ghosta = false;
+        }
+        if (boa.GetComponent<AbilitySlot>().id_self == 2)
+        {
+            be = KeyCode.B;
+        }
+        else
+        {
+            be = KeyCode.None;
+            GetComponent<Movement>().bowexp = false;
+        }
+        if (boa.GetComponent<AbilitySlot>().id_self == 3)
+        {
+            ts = KeyCode.B;
 
+        }
+        else
+        {
+            ts = KeyCode.None;
+            GetComponent<Movement>().tripleshot = false;
+        }
+        if (boa.GetComponent<AbilitySlot>().id_self == 4)
+        {
+            tp = KeyCode.B;
+
+        }
+        else
+        {
+            tp = KeyCode.None;
+            tele = false;
+        }
+        if (boa.GetComponent<AbilitySlot>().id_self == 5)
+        {
+            Home = KeyCode.B;
+
+        }
+        else
+        {
+            Home = KeyCode.None;
+            aim = false;
+        }
+        if (lss == true)
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0.9f, 0.9f, 1);
+        } else if (manass == true)
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(0.9f, 1f, 1f, 1);
+        }
+        else
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        }
         res = Screen.width;
         if (Time.timeScale != 0)
         {
@@ -269,9 +500,86 @@ public class ManaManager : MonoBehaviour
                 {
                     daura = false;
                 }
-                else if (mana > flyc)
+                else if (mana > dac)
                 {
                     daura = true;
+                }
+            }
+            if (Input.GetKeyDown(Home))
+            {
+                if (aim == true)
+                {
+                    aim = false;
+                }
+                else if (mana > aimc)
+                {
+                    aim = true;
+                }
+            }
+            if (Input.GetKeyDown(tp))
+            {
+                if (tele == true)
+                {
+                    tele = false;
+                }
+                else if (mana > tpc)
+                {
+                    tele = true;
+                }
+            }
+            if (Input.GetKeyDown(ghostt))
+            {
+                if (ghosta == true)
+                {
+                    ghosta = false;
+                }
+                else if (mana > ghoc)
+                {
+                    ghosta = true;
+                }
+            }
+            if (Input.GetKeyDown(lssw))
+            {
+                if (lss == true)
+                {
+                    lss = false;
+                }
+                else
+                {
+                    lss = true;
+                }
+            }
+            if (Input.GetKeyDown(manas))
+            {
+                if (manass == true)
+                {
+                    manass = false;
+                }
+                else
+                {
+                    manass = true;
+                }
+            }
+            if (Input.GetKeyDown(frs))
+            {
+                if (freeze == true)
+                {
+                    freeze = false;
+                }
+                else if (mana > frc)
+                {
+                    freeze = true;
+                }
+            }
+            if (Input.GetKeyDown(Laura))
+            {
+                if (lsaura == true)
+                {
+                    lsaura = false;
+                }
+                else if (mana > lac)
+                {
+                    lsaura = true;
                 }
             }
             if (Input.GetKeyDown(Heaura))
@@ -280,7 +588,7 @@ public class ManaManager : MonoBehaviour
                 {
                     heaura = false;
                 }
-                else if (mana > flyc)
+                else if (mana > hac)
                 {
                     heaura = true;
                 }
@@ -291,7 +599,7 @@ public class ManaManager : MonoBehaviour
                 {
                     fraur = false;
                 }
-                else if (mana > flyc)
+                else if (mana > fac)
                 {
                     fraur = true;
                 }

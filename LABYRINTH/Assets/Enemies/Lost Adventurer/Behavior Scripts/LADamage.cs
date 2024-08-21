@@ -65,10 +65,30 @@ public class LADamage : MonoBehaviour
             }
             GetComponent<Rigidbody2D>().AddForce(18 * Vector3.Normalize(transform.position - GameObject.FindWithTag("Player").transform.position) * (1 / (1 - hitbox.sharedMaterial.bounciness) - 1));
         }
+        if (hitbox.gameObject.tag == "Player")
+        {
+            if (hitbox.gameObject.GetComponent<ManaManager>().lss == true && hitbox.sharedMaterial != null)
+            {
+                hitbox.gameObject.GetComponent<PlayerDamage>().health += hitbox.gameObject.GetComponent<ManaManager>().lsamt;
+            }
+            if (hitbox.gameObject.GetComponent<ManaManager>().manass == true && hitbox.sharedMaterial != null)
+            {
+                hitbox.gameObject.GetComponent<ManaManager>().mana += hitbox.gameObject.GetComponent<ManaManager>().mansamt;
+            }
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.sharedMaterial != null)
+        if (collision.gameObject.tag == "Player")
+        {
+            if (collision.gameObject.GetComponent<ManaManager>().freeze == true && collision.sharedMaterial != null)
+            {
+                GetComponent<FreezeManager>().freezeTime = 25;
+                collision.GetComponent<ManaManager>().mana -= collision.GetComponent<ManaManager>().frc;
+
+            }
+        }
+        if (collision.sharedMaterial != null)
         {
             collct += 1;
         }
