@@ -79,7 +79,15 @@ public class HitboxMaker : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D hitbox)
     {
-        hitbox.gameObject.GetComponent<PlayerDamage>().damage += attackdmg;
+        if (hitbox.sharedMaterial == null)
+        {
+            hitbox.gameObject.GetComponent<PlayerDamage>().damage += attackdmg;
+        }
+        else
+        {
+            Parent.GetComponent<Rigidbody2D>().AddForce(k * Vector3.Normalize(transform.position - hitbox.gameObject.transform.position));
+        }
+            
         hitbox.gameObject.GetComponent<Rigidbody2D>().AddForce(-k*Vector3.Normalize(transform.position - hitbox.gameObject.transform.position));
     }
 }

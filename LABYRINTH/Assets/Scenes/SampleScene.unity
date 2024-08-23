@@ -19604,6 +19604,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1483168463}
   m_CullTransparentMesh: 1
+--- !u!1001 &1494502306
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7988151275106207929, guid: 56483bda4845348d2aa366b2f6131378, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.333074
+      objectReference: {fileID: 0}
+    - target: {fileID: 7988151275106207929, guid: 56483bda4845348d2aa366b2f6131378, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.624179
+      objectReference: {fileID: 0}
+    - target: {fileID: 7988151275106207929, guid: 56483bda4845348d2aa366b2f6131378, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7988151275106207929, guid: 56483bda4845348d2aa366b2f6131378, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7988151275106207929, guid: 56483bda4845348d2aa366b2f6131378, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7988151275106207929, guid: 56483bda4845348d2aa366b2f6131378, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7988151275106207929, guid: 56483bda4845348d2aa366b2f6131378, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7988151275106207929, guid: 56483bda4845348d2aa366b2f6131378, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7988151275106207929, guid: 56483bda4845348d2aa366b2f6131378, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7988151275106207929, guid: 56483bda4845348d2aa366b2f6131378, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386841454349483599, guid: 56483bda4845348d2aa366b2f6131378, type: 3}
+      propertyPath: m_Name
+      value: Lost Adventurer
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 56483bda4845348d2aa366b2f6131378, type: 3}
 --- !u!1 &1501570702
 GameObject:
   m_ObjectHideFlags: 0
@@ -24445,7 +24502,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 3
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -26563,6 +26620,13 @@ MonoBehaviour:
   ghoc: 0
   abilitystatus: {fileID: 952209287}
   abistat: 
+  manablock: 0
+  mbtog: 0
+  mbc: 2
+  counterattack: 1
+  catk: 0
+  catc: 0
+  shield: {fileID: 6200000, guid: e2a4975dcf1d545e4a3d77a87cd612b2, type: 2}
 --- !u!1 &1889344948
 GameObject:
   m_ObjectHideFlags: 0
@@ -29610,3 +29674,4 @@ SceneRoots:
   - {fileID: 1883679030}
   - {fileID: 1425347186}
   - {fileID: 908294083}
+  - {fileID: 1494502306}

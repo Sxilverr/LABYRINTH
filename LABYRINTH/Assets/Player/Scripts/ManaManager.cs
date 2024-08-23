@@ -93,6 +93,13 @@ public class ManaManager : MonoBehaviour
     public float ghoc;
     public TMP_Text abilitystatus;
     public string abistat;
+    public bool manablock;
+    public KeyCode mbtog;
+    public float mbc;
+    public bool counterattack;
+    public KeyCode catk;
+    public float catc;
+    public PhysicsMaterial2D shield;
     // Start is called before the first frame update
     void Start()
     {
@@ -504,6 +511,42 @@ public class ManaManager : MonoBehaviour
                 {
                     daura = true;
                 }
+            }
+            if (Input.GetKeyDown(mbtog))
+            {
+                if (manablock == true)
+                {
+                    manablock = false;
+                }
+                else if (mana > dac)
+                {
+                    manablock = true;
+                }
+            }
+            if (Input.GetKeyDown(catk))
+            {
+                if (counterattack == true)
+                {
+                    counterattack = false;
+                    shield.friction = 0.6f;
+                }
+                else
+                {
+                    counterattack = true;
+                    shield.friction = 0;
+                }
+            }
+            if(counterattack == true)
+            {
+                shield.friction = 0.45f;
+            }
+            else
+            {
+                shield.friction = 0f;
+            }
+            if (mana <= mbc * 0.05f)
+            {
+                manablock = false;
             }
             if (Input.GetKeyDown(Home))
             {

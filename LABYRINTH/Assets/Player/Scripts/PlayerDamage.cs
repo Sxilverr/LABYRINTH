@@ -118,24 +118,33 @@ public class PlayerDamage : MonoBehaviour
         healthregen = gameObject.GetComponent<StatManager>().healthR;
         BV.transform.localScale = new Vector3(0.3f+Mathf.Pow(10*lightc, 0.33333333333f)*health/maxhealth/10f*0.7f, 0.3f + Mathf.Pow(10 * lightc, 0.33333333333f) * health / maxhealth / 10f * 0.7f, 0.3f + Mathf.Pow(10 * lightc, 0.33333333333f) * health / maxhealth / 10f * 0.7f);
         damage /= (100+armor);
-        if(damage > 0 && shield == 0)
+        if (!(GetComponent<ManaManager>().manablock == true && Input.GetKey(KeyCode.LeftShift)))
         {
-            health -= damage;
-            damage = 0;
-        }
-        if(damage > 0 && shield > 0)
-        {
-            if(damage < shield)
+            if (damage > 0 && shield == 0)
             {
-                shield -= damage;
-                damage = 0;
-            } else
-            {
-                damage -= shield;
-                shield = 0;
                 health -= damage;
                 damage = 0;
             }
+            if (damage > 0 && shield > 0)
+            {
+                if (damage < shield)
+                {
+                    shield -= damage;
+                    damage = 0;
+                }
+                else
+                {
+                    damage -= shield;
+                    shield = 0;
+                    health -= damage;
+                    damage = 0;
+                }
+            }
+        }
+        else
+        {
+            GetComponent<ManaManager>().mana -= damage * GetComponent<ManaManager>().mbc;
+            damage = 0;
         }
     }
 }

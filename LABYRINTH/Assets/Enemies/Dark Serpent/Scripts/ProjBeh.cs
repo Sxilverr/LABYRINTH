@@ -26,7 +26,8 @@ public class ProjBeh : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerDamage>().damage = damage;
+            if (collision.sharedMaterial == null)
+                collision.gameObject.GetComponent<PlayerDamage>().damage = damage;
         }
         if (collision.gameObject.tag != "Enemy")
             Destroy(gameObject);

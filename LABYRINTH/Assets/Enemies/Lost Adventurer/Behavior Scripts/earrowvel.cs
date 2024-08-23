@@ -25,7 +25,8 @@ public class earrowvel : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player" && collision.gameObject.layer != 6)
         {
-            collision.gameObject.GetComponent<PlayerDamage>().damage = damage;
+            if(collision.sharedMaterial == null)
+                collision.gameObject.GetComponent<PlayerDamage>().damage = damage;
         }
         if (collision.gameObject.tag != "Enemy" && collision.gameObject.layer != 6)
             Destroy(gameObject);
