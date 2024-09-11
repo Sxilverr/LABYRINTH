@@ -54,6 +54,7 @@ public class ManaManager : MonoBehaviour
     public GameObject Pa;
     public GameObject swa;
     public GameObject boa;
+    public GameObject sha;
     public KeyCode fly;
     public float flyc;
     public KeyCode Damaura;
@@ -100,6 +101,15 @@ public class ManaManager : MonoBehaviour
     public KeyCode catk;
     public float catc;
     public PhysicsMaterial2D shield;
+    public bool backshield;
+    public KeyCode bsk;
+    public float bsc;
+    public bool shorbit;
+    public KeyCode shk;
+    public float shc;
+    public bool orbitpummel;
+    public KeyCode opk;
+    public float opc;
     // Start is called before the first frame update
     void Start()
     {
@@ -235,6 +245,19 @@ public class ManaManager : MonoBehaviour
         {
             abistat = abistat + "Disabled\n";
         }
+        if (sha.GetComponent<AbilitySlot>().id_self == 2)
+        {
+            abistat = abistat + "Shield - ";
+            if (manablock == true)
+            {
+                abistat = abistat + "Enabled\n";
+            }
+            else
+            {
+                abistat = abistat + "Disabled\n";
+            }
+        }
+
         abilitystatus.text = abistat;
 
 
@@ -487,6 +510,50 @@ public class ManaManager : MonoBehaviour
             Home = KeyCode.None;
             aim = false;
         }
+        if (sha.GetComponent<AbilitySlot>().id_self == 1)
+        {
+            backshield = true;
+        }
+        else
+        {
+            backshield = false;
+        }
+        if (sha.GetComponent<AbilitySlot>().id_self == 2)
+        {
+            mbtog = KeyCode.N;
+        }
+        else
+        {
+            mbtog = KeyCode.None;
+            manablock = false;
+        }
+        if (sha.GetComponent<AbilitySlot>().id_self == 3)
+        {
+            counterattack = true;
+
+        }
+        else
+        {
+            counterattack = false;
+        }
+        if (sha.GetComponent<AbilitySlot>().id_self == 4)
+        {
+            shorbit = true;
+
+        }
+        else
+        {
+            shorbit = false;
+        }
+        if (sha.GetComponent<AbilitySlot>().id_self == 5)
+        {
+            orbitpummel = true;
+
+        }
+        else
+        {
+            orbitpummel= false;
+        }
         if (lss == true)
         {
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0.9f, 0.9f, 1);
@@ -536,7 +603,40 @@ public class ManaManager : MonoBehaviour
                     shield.friction = 0;
                 }
             }
-            if(counterattack == true)
+            if (Input.GetKeyDown(bsk))
+            {
+                if (backshield == true)
+                {
+                    backshield = false;
+                }
+                else
+                {
+                    backshield = true;
+                }
+            }
+            if (Input.GetKeyDown(shk))
+            {
+                if (shorbit == true)
+                {
+                    shorbit = false;
+                }
+                else
+                {
+                    shorbit = true;
+                }
+            }
+            if (Input.GetKeyDown(opk))
+            {
+                if (orbitpummel == true)
+                {
+                    orbitpummel = false;
+                }
+                else
+                {
+                    orbitpummel = true;
+                }
+            }
+            if (counterattack == true)
             {
                 shield.friction = 0.45f;
             }

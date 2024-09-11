@@ -189,6 +189,48 @@ public class AbilitySlot : MonoBehaviour
                 Name.text = "Vortex";
             }
         }
+        if (gameObject.name.StartsWith("Shi"))
+        {
+            if (id_self == 0)
+            {
+                Plus.SetActive(true);
+                Name.text = "Shield Ability";
+                self.color = new Color(36f / 255, 36f / 255, 36f / 255);
+            }
+            else
+            {
+                self.color = new Color(1, 1, 1);
+                Plus.SetActive(false);
+            }
+            if (id_self == 1)
+            {
+                Name.text = "2-Sided Shield";
+            }
+            if (id_self == 2)
+            {
+                Name.text = "Mana Shield";
+            }
+            if (id_self == 3)
+            {
+                Name.text = "Counter Attack";
+            }
+            if (id_self == 4)
+            {
+                Name.text = "Orbit";
+            }
+            if (id_self == 5)
+            {
+                Name.text = "Death Orbit";
+            }
+            if (id_self == 6)
+            {
+                Name.text = "Health Burst";
+            }
+            if (id_self == 7)
+            {
+                Name.text = "Vortex";
+            }
+        }
         self.sprite = idimages[id_self];
     }
 }

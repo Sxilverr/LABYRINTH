@@ -243,10 +243,18 @@ public class Movement : MonoBehaviour
                 anim.SetBool("Shielding", true);
                 if (left == false)
                 {
+                    if (GetComponent<ManaManager>().backshield == true)
+                    {
+                        sl.enabled = true;
+                    }
                     sr.enabled = true;
                 }
                 else
                 {
+                    if (GetComponent<ManaManager>().backshield == true)
+                    {
+                        sr.enabled = true;
+                    }
                     sl.enabled = true;
                 }
             }
