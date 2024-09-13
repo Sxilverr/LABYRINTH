@@ -6,6 +6,7 @@ public class Orbiter : MonoBehaviour
 {
     public float k;
     public float damage;
+    public BoxCollider2D hitbox;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +16,13 @@ public class Orbiter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.LeftShift) && GameObject.FindWithTag("Player").GetComponent<Movement>().jumpenabled() == true && (GameObject.FindWithTag("Player").GetComponent<ManaManager>().shorbit == true || GameObject.FindWithTag("Player").GetComponent<ManaManager>().orbitpummel == true))
+        {
+            hitbox.enabled = true;
+        } else
+        {
+            hitbox.enabled = false;
+        }
     }
     private void OnTriggerEnter2D(Collider2D hit)
     {

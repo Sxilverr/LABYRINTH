@@ -67,6 +67,9 @@ public class StatManager : MonoBehaviour
     public float leveltimer;
     public float prevlevelchecker;
     public float res;
+    public float levelpoints;
+    public float pointlevelchecker;
+    public TMP_Text points; 
     // Start is called before the first frame update
     void Start()
     {
@@ -112,6 +115,7 @@ public class StatManager : MonoBehaviour
             XPBAR.rectTransform.localScale = new Vector2(res/1920, res/1920);
             LVtext.text = "LVL 100";
         }
+        points.text = "Points: " + levelpoints.ToString();
     }
     void FixedUpdate()
     {
@@ -120,6 +124,11 @@ public class StatManager : MonoBehaviour
         {
             LVLup.enabled = true;
             LVLup.text = "Level Up! \n +" + (4*(level-prevlevel)) + " HP \n +" + ((25 + (level) + Mathf.Floor(0.0125f * (level) * (level))) / 25 * (1 + lightCm) * (100 + lightCa) - ((25 + prevlevel + Mathf.Floor(0.0125f * prevlevel * prevlevel)) / 25 * (1 + lightCm) * (100 + lightCa))).ToString() + " Mana";
+            while(level > pointlevelchecker)
+            {
+                levelpoints += Mathf.Floor(1 + 0.0225f * pointlevelchecker + 0.0001f * pointlevelchecker * pointlevelchecker);
+                pointlevelchecker += 1;
+            }
             if(prevlevelchecker != level)
             {
                 leveltimer = 100;
