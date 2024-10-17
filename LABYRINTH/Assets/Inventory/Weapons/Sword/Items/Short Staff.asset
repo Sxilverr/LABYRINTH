@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 106f56055ee455945bec072dfb99b998, type: 3}
+  m_Name: Short Staff
+  m_EditorClassIdentifier: 
+  baseTexture: {fileID: 21300000, guid: 5d6acda1455680b449459a30bbde5be5, type: 3}
+  diagTexture: {fileID: 21300000, guid: 3fdfdad12bd19704496dd409d89b6d98, type: 3}
+  strengthBonus: -40
+  id: 9
+  itemName: Short Staff
+  manabonus: 250
+  speedbonus: 50

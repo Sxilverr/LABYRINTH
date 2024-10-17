@@ -4,6 +4,7 @@ using TMPro.EditorUtilities;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
+using UnityEngine.U2D;
 
 public class Sword : MonoBehaviour
 {
@@ -24,7 +25,9 @@ public class Sword : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Parent.GetComponent<Movement>().left == true)
+        hh = Parent.GetComponent<StatManager>().SelectedSword.baseTexture;
+        dg = Parent.GetComponent<StatManager>().SelectedSword.diagTexture;
+        if (Parent.GetComponent<Movement>().left == true)
         {
             holder.transform.localScale = new Vector3(-1, 1, 1);
         } else

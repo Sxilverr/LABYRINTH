@@ -69,7 +69,8 @@ public class StatManager : MonoBehaviour
     public float res;
     public float levelpoints;
     public float pointlevelchecker;
-    public TMP_Text points; 
+    public TMP_Text points;
+    public SwordTemplate SelectedSword;
     // Start is called before the first frame update
     void Start()
     {
@@ -81,14 +82,14 @@ public class StatManager : MonoBehaviour
     {
         res = Screen.width;
         lightC = (25+level+Mathf.Floor(0.0125f*level*level))/25*(1 + lightCm) * (100 + lightCa);
-        manaC = Mathf.Pow((1 + manaCm), (1 + manaCe))*(lightC+manaCa);
+        manaC = Mathf.Pow((1 + manaCm), (1 + manaCe))*(lightC+manaCa+SelectedSword.manabonus);
         manaR = (1 + manaRm) * manaC / 100f;
         manaE = (1 + manaEm) * (100 + manaEa);
         healthC = 100f + healthCa+level*4;
         healthR = (1 + healthRm) * (Mathf.Log10(lightC) - 1) * (healthC + healthRa) / 100f;
         shield = healthC*(1 + shieldm) * shieldalloc / 1000f;
-        strength = (1 + strengthm) * (strengthalloc + 100 * (1 + strengtha));
-        speed = 0.5f * (1 + mobilitym) * (100*Mathf.Log10(lightC) + mobilitya + 60*Mathf.Log(speedalloc/100+1));
+        strength = (1 + strengthm) * (strengthalloc + 100 * (1 + strengtha + SelectedSword.strengthBonus / 100));
+        speed = 0.5f * (1 + mobilitym) * (100*Mathf.Log10(lightC) + mobilitya + SelectedSword.speedbonus + 60*Mathf.Log(speedalloc/100+1));
         jumph = 0.25f * (1 + mobilitym) * (100*Mathf.Log10(lightC) + mobilitya + 60*Mathf.Log(jumpalloc/100+1))+50;
         Movement.speed = speed*3f;
         Movement.jump = jumph;

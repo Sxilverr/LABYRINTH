@@ -6743,7 +6743,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &356989557
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30274,6 +30274,7 @@ MonoBehaviour:
   levelpoints: 3
   pointlevelchecker: 0
   points: {fileID: 1494376573}
+  SelectedSword: {fileID: 11400000, guid: 68cb37339e9dbce4b85b4ea39436b3ae, type: 2}
 --- !u!95 &1883679035
 Animator:
   serializedVersion: 5
