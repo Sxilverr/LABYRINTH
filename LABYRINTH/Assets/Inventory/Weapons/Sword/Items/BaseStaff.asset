@@ -19,3 +19,4 @@ MonoBehaviour:
   itemName: Decaying Staff
   manabonus: 50
   speedbonus: 0
+  Lore: 'Just a Basic Staff.\nStrength: -35\nMana: +50'

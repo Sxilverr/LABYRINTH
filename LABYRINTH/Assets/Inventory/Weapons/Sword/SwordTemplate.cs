@@ -13,5 +13,6 @@ public class SwordTemplate : ScriptableObject
     public string itemName;
     public float manabonus;
     public float speedbonus;
+    public string Lore;
 
 }

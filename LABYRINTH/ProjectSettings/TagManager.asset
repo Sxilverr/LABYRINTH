@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - MagicProj
   - SwordMagicProj
+  - ScrollS
+  - SwordInven
   layers:
   - Default
   - TransparentFX

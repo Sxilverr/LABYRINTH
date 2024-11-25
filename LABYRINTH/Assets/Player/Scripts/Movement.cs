@@ -68,6 +68,7 @@ public class Movement : MonoBehaviour
     public float res;
     public bool fly;
     public float flyspeed;
+    public GameObject swinv;
     // Start is called before the first frame update
     void Start()
     {
